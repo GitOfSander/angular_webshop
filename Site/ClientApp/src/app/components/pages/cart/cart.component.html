@@ -1,0 +1,89 @@
+<highlight-features [res]="res" [website]="website"></highlight-features>
+
+<breadcrumbs [breadcrumbs]="res.page.breadcrumbs" [title]="res.page.resources.title"></breadcrumbs>
+
+<section class="container text text-left cart-inner">
+    <div class="row">
+        <div class="col-md-8 cart-table" ngsReveal>
+            <h2>{{ res.page.resources.subtitle }}</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <td align="left">{{ website.resources.product }}</td>
+                        <td></td>
+                        <td align="left">{{ website.resources.quantity }}</td>
+                        <td align="left">{{ website.resources.total }}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of order?.products" #productsInitialized [attr.data-id]="i.id">
+                        <td valign="middle">
+                            <a id="delete" (click)="deleteProduct(i.id)"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 368.8 368.8" style="enable-background:new 0 0 368.8 368.8;" xml:space="preserve"><rect x="148.8" y="-40.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -76.3719 184.3781)" fill="#FFFFFF" width="71.3" height="450.3" /><rect x="148.8" y="-40.7" transform="matrix(0.7071 0.7071 -0.7071 0.7071 184.3781 -76.3719)" fill="#FFFFFF" width="71.3" height="450.3" /></svg></a>
+                            <div class="cart-image">
+                                <img *ngIf="i.files.image" src="{{ i.files.pImage[0].compressedPath }}" alt="{{ i.files.pImage[0].alt }}" />
+                            </div>
+                        </td>
+                        <td valign="middle">
+                            <div class="cart-item-text">
+                                <span class="cart-item-title">{{ website.resources.package }}</span>
+                                <span class="cart-item-subtitle">{{ i.resources.title }}</span>
+                                <span class="cart-message" *ngIf="i.manageStock && i.stockQuantity == 0 && i.backorders == 'notify' || !i.manageStock && i.stockStatus == 'backorder'">Bestellen van dit product is mogelijk, maar is momenteel niet op voorraad.</span>
+                                <span class="cart-message" *ngIf="i.maxPerOrder > 0">Er is een maximaal aantal van {{ i.maxPerOrder }} per order ingesteld op dit product.</span>
+                            </div>
+                        </td>
+                        <td valign="middle" class="form-group">
+                            <div class="form-group input-number" style="width: 74px; margin-bottom: 0;">
+                                <input class="form-control" type="number" value="{{ i.quantity }}" (blur)="updateQuantity(i.id, $event.target.value)" />
+                                <button class="plus" (click)="plus(i.id)" [disabled]="disabled"></button>
+                                <button class="min" (click)="min(i.id)" [disabled]="disabled"></button>
+                            </div>
+                        </td>
+                        <td valign="middle" align="left">{{ i.total }}</td>
+                    </tr>
+                    <tr *ngIf="order?.products?.length === 0" class="cart-empty">
+                        <td colspan="4" align="center">{{ website.resources.scEmpty }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="col-6">
+                <a class="btn btn-link" [routerLink]="continueShoppingUrl">Verder winkelen</a>
+            </div>
+        </div>
+        <div class="col-md-3 offset-md-1 cart-info" ngsReveal>
+            <span class="cart-info-title">{{ website.resources.orderInfo }}</span>
+            <table class="cart-count" *ngIf="order?.quantity > 0">
+                <tr>
+                    <td align="left" *ngIf="order?.quantity === 1">{{ order?.quantity }} {{ website.resources.product }}</td>
+                    <td align="left" *ngIf="order?.quantity > 1">{{ order?.quantity }} {{ website.resources.products }}</td>
+                    <td align="right">{{ order?.subtotal }}</td>
+                </tr>
+            </table>
+
+            <div class="cart-shipping-method form-group" *ngIf="order?.shippingMethods?.length > 0">
+                <label>{{ website.resources.shipping }}</label>
+                <div class="input-select input-select-sm">
+                    <select class="form-control form-control-sm" (change)="updateShippingMethod($event.target.value)">
+                        <option *ngFor="let i of order?.shippingMethods" [attr.selected]="i.selected ? '' : null" [attr.value]="i.id">{{ i.name }} - {{ i.cost }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <hr *ngIf="order?.shippingMethods?.length > 0" />
+
+            <table class="cart-total">
+                <tr>
+                    <td align="left">{{ website.resources.tax }}</td>
+                    <td align="right">{{ order?.tax }}</td>
+                </tr>
+                <tr>
+                    <td align="left">{{ website.resources.total }}</td>
+                    <td align="right">{{ order?.total }}</td>
+                </tr>
+            </table>
+
+            <a class="btn btn-success btn-block" [routerLink]="checkoutUrl">Afrekenen</a>
+        </div>
+    </div>
+</section>
+
+<footer [website]="website"></footer>

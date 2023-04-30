@@ -1,0 +1,107 @@
+﻿/* Confirmation */
+
+body.confirmation main > div { 
+    overflow: hidden;
+}
+
+.confirm {
+    position: relative;
+
+    height: calc(100vh - 115px);
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+    .confirm:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        content: ' ';
+        z-index: 0;
+
+        background: rgba(255,255,255,0.85);
+    }
+
+    .confirm h1 {
+        color: #000000;
+        font-family: 'Frank Ruhl Libre';
+        font-size: 28px;
+        font-weight: 300;
+        line-height: 38px;
+
+        margin: 20px 0;
+    }
+
+    .confirm p {
+        color: #1b1b1b;
+        font-family: 'Lato';
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 22px;
+        text-transform: uppercase;
+
+        margin: 0;
+    }
+
+        .confirm p b { color: #daa520; }
+
+    .confirm .btn {
+        padding-left: 22px !important;
+        padding-right: 22px !important;
+        margin-top: 45px;
+
+        background-color: transparent;
+    }
+
+    .confirm .inner {
+        position: relative;
+
+        z-index: 1;
+
+        text-align: center;
+
+        height: 100%;
+
+        padding-top: 110px;
+        padding-bottom: 110px;
+    }
+
+        .confirm .inner > div {
+            position: absolute;
+            top: 50%;
+            left: 0;
+
+            -webkit-transform: translateX(0%) translateY(-50%);
+               -moz-transform: translateX(0%) translateY(-50%);
+                -ms-transform: translateX(0%) translateY(-50%);
+                 -o-transform: translateX(0%) translateY(-50%);
+                    transform: translateX(0%) translateY(-50%);
+        }
+
+@media (max-width: 1400px) {
+    .confirm {
+        height: calc(100vh - 93px);
+    }
+
+        .confirm h1 {
+            font-size: 23px;
+            line-height: 33px;
+
+            margin: 16px 0;
+        }
+
+        .confirm p {
+            font-size: 10px;
+            line-height: 20px;
+        }
+
+        .confirm .btn {
+            padding-left: 17px !important;
+            padding-right: 17px !important;
+            margin-top: 37px;
+        }
+}

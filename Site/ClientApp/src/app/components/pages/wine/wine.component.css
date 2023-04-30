@@ -1,0 +1,296 @@
+﻿/* Wines */
+
+body.wines main { background-color: #ffffff; }
+
+.wine {
+    padding-bottom: 110px;
+}
+
+    .wine p {
+        color: #584327;
+        font-family: 'Lato';
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 27px;
+
+        margin-bottom: 26px;
+    }
+
+.wine-header {
+    position: relative;
+
+    height: calc(55vh);
+    margin-bottom: 110px;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+    .wine-header > div {
+        z-index: 1;
+    }
+
+    .wine-header img {
+        position: absolute;
+        right: 7vw;
+        bottom: 0;
+
+        height: 91%;
+    }
+
+    .wine-header h2 {
+        color: #000000;
+        font-family: 'Frank Ruhl Libre';
+        font-size: 28px;
+        font-weight: 500;
+        line-height: 33px;
+
+        margin: 0 0 10px 0;
+    }
+
+    .wine-header h3 {
+        color: #daa520;
+        font-family: 'Frank Ruhl Libre';
+        font-size: 28px;
+        font-weight: 300;
+        line-height: 33px;
+
+        margin: 0 0 0 0;
+    }
+
+    .wine-header:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        content: ' ';
+        z-index: 0;
+
+        background: rgba(255,255,255,0.85);
+    }
+
+.wine-inner {
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+    z-index: 1;
+
+    -webkit-transform: translateX(0%) translateY(-50%);
+       -moz-transform: translateX(0%) translateY(-50%);
+        -ms-transform: translateX(0%) translateY(-50%);
+         -o-transform: translateX(0%) translateY(-50%);
+            transform: translateX(0%) translateY(-50%);
+}
+
+.wine-title {
+    display: block;
+
+    color: #000000;
+    font-family: 'Frank Ruhl Libre';
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 38px;
+
+    margin: 0 0 35px 0;
+}
+
+.wine-details {
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+}
+
+    .wine-details li {
+        color: #daa520;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 40px;
+
+        padding-left: 39px;
+    }
+
+        .wine-details li:before {
+            position: absolute;
+            left: 14px;
+
+            content: ' ';
+            display: inline-block;
+
+            background-repeat: no-repeat;
+        }
+
+        .wine-details li.wine-country:not(:empty):before {
+            width: 22px;
+            height: 22px;
+            margin: 11px 0 0 0;
+
+            background-image: url("data:image/svg+xml;utf8,%3Csvg version='1.1' fill='none' stroke='%23DAA520' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' id='icons' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 50.7 50.3' style='enable-background:new 0 0 50.7 50.3;' xml:space='preserve'%3E %3Cg%3E %3Ccircle class='st0' cx='25.4' cy='25.2' r='13.4'/%3E %3Cg%3E %3Cg%3E %3Cline class='st0' x1='25.4' y1='3.5' x2='25.4' y2='8.5'/%3E %3Cline class='st0' x1='25.4' y1='41.9' x2='25.4' y2='46.8'/%3E %3Cg%3E %3Cline class='st0' x1='31' y1='2.2' x2='29.3' y2='8.9'/%3E %3Cline class='st0' x1='21.4' y1='41.4' x2='19.7' y2='48.2'/%3E %3C/g%3E %3C/g%3E %3Cg%3E %3Cline class='st0' x1='47' y1='25.2' x2='42.1' y2='25.2'/%3E %3Cline class='st0' x1='8.6' y1='25.2' x2='3.7' y2='25.2'/%3E %3Cg%3E %3Cline class='st0' x1='48.4' y1='30.8' x2='41.6' y2='29.2'/%3E %3Cline class='st0' x1='9.1' y1='21.2' x2='2.4' y2='19.5'/%3E %3C/g%3E %3C/g%3E %3C/g%3E %3Cg%3E %3Cg%3E %3Cline class='st0' x1='36.2' y1='6.4' x2='33.7' y2='10.7'/%3E %3Cline class='st0' x1='17' y1='39.6' x2='14.6' y2='43.9'/%3E %3Cg%3E %3Cline class='st0' x1='41.7' y1='8.1' x2='36.9' y2='13.1'/%3E %3Cline class='st0' x1='13.8' y1='37.2' x2='9' y2='42.3'/%3E %3C/g%3E %3C/g%3E %3Cg%3E %3Cline class='st0' x1='44.1' y1='36' x2='39.8' y2='33.5'/%3E %3Cline class='st0' x1='10.9' y1='16.8' x2='6.6' y2='14.4'/%3E %3Cg%3E %3Cline class='st0' x1='42.5' y1='41.5' x2='37.4' y2='36.7'/%3E %3Cline class='st0' x1='13.3' y1='13.6' x2='8.3' y2='8.8'/%3E %3C/g%3E %3C/g%3E %3C/g%3E %3Cg%3E %3Cg%3E %3Cline class='st0' x1='44' y1='14.1' x2='39.7' y2='16.6'/%3E %3Cline class='st0' x1='11' y1='33.7' x2='6.8' y2='36.2'/%3E %3Cg%3E %3Cline class='st0' x1='48' y1='18.3' x2='41.3' y2='20.3'/%3E %3Cline class='st0' x1='9.4' y1='30' x2='2.7' y2='32'/%3E %3C/g%3E %3C/g%3E %3Cg%3E %3Cline class='st0' x1='36.4' y1='43.8' x2='33.9' y2='39.5'/%3E %3Cline class='st0' x1='16.8' y1='10.8' x2='14.3' y2='6.6'/%3E %3Cg%3E %3Cline class='st0' x1='32.2' y1='47.8' x2='30.2' y2='41.2'/%3E %3Cline class='st0' x1='20.5' y1='9.2' x2='18.5' y2='2.5'/%3E %3C/g%3E %3C/g%3E %3C/g%3E %3C/g%3E %3C/svg%3E");
+            background-size: 22px 22px;
+        }
+
+        .wine-details li.wine-fruit:not(:empty):before {
+            width: 20px;
+            height: 24px;
+            margin: 10px 0 0 2px;
+
+            background-image: url("data:image/svg+xml;utf8,%3Csvg version='1.1' fill='none' stroke='%23DAA520' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' id='Icons' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 42.3 50.2' style='enable-background:new 0 0 42.3 50.2;' xml:space='preserve'%3E %3Cg%3E %3Cellipse class='st0' cx='21.1' cy='18.3' rx='7.1' ry='7.1'/%3E %3Cpath class='st0' d='M28.3,32.5c0,1.7-0.6,3.3-1.6,4.5c-1.3,1.6-3.3,2.6-5.5,2.6c-3.9,0-7.1-3.2-7.1-7.1c0-3.9,3.2-7.1,7.1-7.1 C25.1,25.4,28.3,28.6,28.3,32.5z'/%3E %3Cpath class='st0' d='M26.6,36.5c1,1.2,1.7,2.8,1.7,4.6c0,3.9-3.2,7.1-7.1,7.1c-3.9,0-7.1-3.2-7.1-7.1c0-1.6,0.5-3.1,1.4-4.3'/%3E %3Cg%3E %3Cpath class='st0' d='M13.5,41.7c-0.2,0-0.3,0-0.5,0c-3.9,0-7.1-3.2-7.1-7.1c0-1.1,0.2-2.1,0.7-3'/%3E %3Cpath class='st0' d='M14.4,30.2c-1.2,1.1-2.9,1.7-4.6,1.7c-1.1,0-2.1-0.2-3.1-0.7c-2.4-1.1-4.1-3.6-4.1-6.4c0-3.9,3.2-7.1,7.1-7.1 c1.5,0,2.8,0.4,4,1.2'/%3E %3Cpath class='st0' d='M5.3,18.9c-0.2-0.7-0.4-1.5-0.4-2.3c0-3.9,3.2-7.1,7.1-7.1c2.2,0,4.2,1,5.5,2.6'/%3E %3Cg%3E %3Cpath class='st0' d='M28.7,41.7c0.2,0,0.3,0,0.5,0c3.9,0,7.1-3.2,7.1-7.1c0-1.1-0.2-2.1-0.7-3'/%3E %3Cpath class='st0' d='M27.9,30.2c1.2,1.1,2.9,1.7,4.6,1.7c1.1,0,2.1-0.2,3-0.7c2.4-1.1,4.1-3.6,4.1-6.4c0-3.9-3.2-7.1-7.1-7.1 c-1.5,0-2.8,0.4-4,1.2'/%3E %3Cpath class='st0' d='M37,18.9c0.2-0.7,0.4-1.5,0.4-2.3c0-3.9-3.2-7.1-7.1-7.1c-2.2,0-4.2,1-5.5,2.6'/%3E %3C/g%3E %3C/g%3E %3Cpath class='st0' d='M12.7,2.7c0,0,5.2,2.9,5.6,6.8'/%3E %3Cpath class='st0' d='M21.1,9.5c0,0,1.6-4.2,9.9-7.4'/%3E %3C/g%3E %3C/svg%3E");
+            background-size: 20px 24px;
+        }
+
+        .wine-details li.wine-year:not(:empty):before {
+            width: 22px;
+            height: 22px;
+            margin: 10px 0 0 1px;
+
+            background-image: url("data:image/svg+xml;utf8,%3Csvg version='1.1' fill='none' stroke='%23DAA520' stroke-width='2' stroke-miterlimit='10' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 52 51' style='enable-background:new 0 0 52 51;' xml:space='preserve'%3E %3Cg%3E %3Cpath class='st0' d='M43.7,48.5H8.3c-2.9,0-5.3-2.4-5.3-5.3V7.8c0-2.9,2.4-5.3,5.3-5.3h35.5c2.9,0,5.3,2.4,5.3,5.3v35.5 C49,46.1,46.6,48.5,43.7,48.5z'/%3E %3Cline class='st0' x1='3' y1='25.5' x2='49' y2='25.5'/%3E %3Cg%3E %3Cg%3E %3Cpath class='st0' d='M12.5,12.5H12c-1.5,0-2.7,1.2-2.7,2.7v6.9c0,0.5,0.4,0.9,0.9,0.9h4.2c0.5,0,0.9-0.4,0.9-0.9v-6.9 C15.2,13.7,14,12.5,12.5,12.5z'/%3E %3Cline class='st0' x1='12.2' y1='5.6' x2='12.2' y2='12.8'/%3E %3C/g%3E %3Cg%3E %3Cpath class='st0' d='M22.9,12.5h-0.6c-1.5,0-2.7,1.2-2.7,2.7v6.9c0,0.5,0.4,0.9,0.9,0.9h4.2c0.5,0,0.9-0.4,0.9-0.9v-6.9 C25.6,13.7,24.4,12.5,22.9,12.5z'/%3E %3Cline class='st0' x1='22.6' y1='5.6' x2='22.6' y2='12.8'/%3E %3C/g%3E %3Cg%3E %3Cpath class='st0' d='M33.2,12.5h-0.6c-1.5,0-2.7,1.2-2.7,2.7v6.9c0,0.5,0.4,0.9,0.9,0.9H35c0.5,0,0.9-0.4,0.9-0.9v-6.9 C35.9,13.7,34.7,12.5,33.2,12.5z'/%3E %3Cline class='st0' x1='32.9' y1='5.6' x2='32.9' y2='12.8'/%3E %3C/g%3E %3C/g%3E %3Cg%3E %3Cg%3E %3Cpath class='st0' d='M11.3,35.5h-0.6c-1.5,0-2.7,1.2-2.7,2.7v6.9C8.1,45.6,8.5,46,9,46h4.2c0.5,0,0.9-0.4,0.9-0.9v-6.9 C14,36.7,12.8,35.5,11.3,35.5z'/%3E %3Cline class='st0' x1='11.1' y1='28.6' x2='11.1' y2='35.8'/%3E %3C/g%3E %3Cg%3E %3Cpath class='st0' d='M21.3,35.5h-0.6c-1.5,0-2.7,1.2-2.7,2.7v6.9c0,0.5,0.4,0.9,0.9,0.9h4.2c0.5,0,0.9-0.4,0.9-0.9v-6.9 C24,36.7,22.8,35.5,21.3,35.5z'/%3E %3Cline class='st0' x1='21' y1='28.6' x2='21' y2='35.8'/%3E %3C/g%3E %3Cg%3E %3Cpath class='st0' d='M31.3,35.5h-0.6c-1.5,0-2.7,1.2-2.7,2.7v6.9c0,0.5,0.4,0.9,0.9,0.9h4.2c0.5,0,0.9-0.4,0.9-0.9v-6.9 C34,36.7,32.7,35.5,31.3,35.5z'/%3E %3Cline class='st0' x1='31' y1='28.6' x2='31' y2='35.8'/%3E %3C/g%3E %3Cg%3E %3Cpath class='st0' d='M41.2,35.5h-0.6c-1.5,0-2.7,1.2-2.7,2.7v6.9c0,0.5,0.4,0.9,0.9,0.9H43c0.5,0,0.9-0.4,0.9-0.9v-6.9 C43.9,36.7,42.7,35.5,41.2,35.5z'/%3E %3Cline class='st0' x1='40.9' y1='28.6' x2='40.9' y2='35.8'/%3E %3C/g%3E %3C/g%3E %3C/g%3E %3C/svg%3E");
+            background-size: 22px 22px;
+        }
+
+        .wine-details li.wine-producer:not(:empty):before {
+            width: 22px;
+            height: 19px;
+            margin: 12px 0 0 0;
+
+            background-image: url("data:image/svg+xml;utf8,%3Csvg version='1.1' fill='none' stroke='%23DAA520' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' id='Icons' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 44.4 36.5' style='enable-background:new 0 0 44.4 36.5;' xml:space='preserve'%3E %3Cg%3E %3Cpath class='st0' d='M41.6,31.1c-2.7,0.9-5.5,1.6-8.3,2.1c-10.1,1.8-20.7,1.1-30.5-2.1c0-8.6,0-17.1,0-25.7 c9.8-3.2,20.4-3.8,30.5-2.1c2.8,0.5,5.6,1.2,8.3,2.1C41.6,13.9,41.6,22.5,41.6,31.1z'/%3E %3Cline class='st0' x1='31.3' y1='3.5' x2='31.3' y2='32.9'/%3E %3Cline class='st0' x1='12.4' y1='3.5' x2='12.4' y2='32.9'/%3E %3Cg%3E %3Cline class='st0' x1='2.8' y1='8.3' x2='41.6' y2='8.3'/%3E %3Cline class='st0' x1='2.8' y1='15' x2='41.6' y2='15'/%3E %3Cline class='st0' x1='2.8' y1='21.8' x2='41.6' y2='21.8'/%3E %3Cline class='st0' x1='2.8' y1='28.2' x2='41.6' y2='28.2'/%3E %3C/g%3E %3Cpath class='st0' d='M2.3,22.8'/%3E %3Cg%3E %3Cpath class='st0' d='M7.7,32.4'/%3E %3Cpath class='st0' d='M36.7,32.4'/%3E %3C/g%3E %3C/g%3E %3C/svg%3E");
+            background-size: 22px 19px;
+        }
+
+@media (max-width: 1400px) {
+    .wine {
+        padding-bottom: 100px;
+    }
+
+    .wine-header {
+        margin-bottom: 100px;
+    }
+
+        .wine-header h2 {
+            font-size: 23px;
+            line-height: 28px;
+
+            margin: 0 0 8px 0;
+        }
+
+        .wine-header h3 {
+            font-size: 23px;
+            line-height: 28px;
+        }
+
+    .wine-title {
+        font-size: 23px;
+        line-height: 33px;
+
+        margin-bottom: 28px;
+    }
+
+    .wine-details li {
+        font-size: 10px;
+        line-height: 37px;
+
+        padding-left: 31px;
+    }
+
+        .wine-details li:before {
+            left: 14px;
+        }
+
+        .wine-details li.wine-country:before {
+            width: 18px;
+            height: 18px;
+            margin: 10px 0 0 0;
+
+            background-size: 18px 18px;
+        }
+
+        .wine-details li.wine-fruit:before {
+            width: 16px;
+            height: 19px;
+            margin: 9px 0 0 1px;
+
+            background-size: 16px 19px;
+        }
+
+        .wine-details li.wine-year:before {
+            width: 18px;
+            height: 17px;
+            margin: 9px 0 0 0;
+
+            background-size: 18px 17px;
+        }
+
+        .wine-details li.wine-producer:before {
+            width: 18px;
+            height: 15px;
+            margin: 11px 0 0 0;
+
+            background-size: 18px 15px;
+        }
+}
+
+@media (max-width: 991.5px) {
+    .wine {
+        padding-bottom: 11vw;
+    }
+
+    .wine-header {
+        margin-bottom: 11vw;
+
+        background-position: center;
+    }
+
+    .wine-title {
+        font-size: 17px;
+        line-height: 27px;
+
+        margin-bottom: 16px;
+    }
+
+    .wine-details {
+        margin-bottom: 7vw;
+    }
+}
+
+@media (max-width: 767.5px) {
+    .wine-header {
+        height: auto;
+    }
+
+        .wine-header > div {
+            min-height: 150px;
+        }
+
+        .wine-header img {
+            position: relative;
+            left: 50%;
+
+            height: 52vw;
+            min-height:  250px;
+                
+            -webkit-transform: translateX(-50%);
+               -moz-transform: translateX(-50%);
+                -ms-transform: translateX(-50%);
+                 -o-transform: translateX(-50%);
+                    transform: translateX(-50%);
+        }
+
+        .wine-header h2 {
+            font-size: 17px;
+            line-height: 27px;
+
+            margin-bottom: 0;
+        }
+
+        .wine-header h3 {
+            font-size: 17px;
+            line-height: 27px;
+        }
+
+    .wine-inner { 
+        left: 4vw;
+    }
+
+}

@@ -1,0 +1,214 @@
+﻿@model Site.Models.ViewModels.PdfViewModel
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>@Model.Website factuur</title>
+    <meta name="application-name" content="@Model.Website factuur">
+    <meta name="author" content="@Model.Website">
+    <style>
+        html {
+            font: 16px/1 'Open Sans', sans-serif;
+            overflow: auto;
+        }
+
+        body {
+            background: #ffffff !important;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        table.balance {
+            float: right;
+            font-size: 16px;
+            line-height: 24px;
+            margin: 0 26mm 0 0;
+            width: 35%;
+            border-collapse: collapse;
+            border-style: hidden;
+        }
+
+            table.balance th,
+            table.balance td {
+                border: 9px solid #ffffff;
+                border-top: 7px solid #ffffff !important;
+                border-bottom: 7px solid #ffffff !important;
+            }
+
+            table.balance th {
+                text-align: right;
+            }
+
+            table.balance:after {
+                clear: both;
+                content: "";
+                display: table;
+            }
+
+        table.inventory {
+            clear: left;
+            font-size: 16px;
+            line-height: 24px;
+            width: 210.8mm;
+            margin: 0 26mm 50px 26mm !important;
+            padding: 0;
+            border-collapse: collapse;
+            border-style: hidden;
+        }
+
+            table.inventory thead {
+                width: 100%;
+            }
+
+            table.inventory td {
+                border: 13px solid #ffffff;
+                border-top: 7px solid #ffffff !important;
+                border-bottom: 7px solid #ffffff !important;
+            }
+
+
+                table.inventory td:nth-child(1) {
+                    width: 35%;
+                }
+
+                table.inventory td:nth-child(2) {
+                    text-align: right;
+                    width: 15%;
+                }
+
+                table.inventory td:nth-child(3) {
+                    text-align: right;
+                    width: 15%;
+                }
+
+                table.inventory td:nth-child(4) {
+                    text-align: right;
+                    width: 16%;
+                }
+
+                table.inventory td:nth-child(5) {
+                    text-align: right;
+                    width: 19%;
+                }
+
+        /* table balance */
+
+        table.balance th, table.balance td {
+            width: 50%;
+        }
+
+        table.balance td {
+            text-align: right;
+        }
+
+        .notes {
+            clear: left;
+            width: 100%;
+            padding: 70px 0 0 26mm !important
+        }
+
+            .notes h3 {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+
+            .notes p {
+                font-size: 16px;
+                line-height: 27px;
+                white-space: pre-line;
+            }
+    </style>
+
+    <style>
+        @@media print {
+            background: #ffffff !important;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+    </style>
+</head>
+<body style="border: none; margin: 0; padding: 0;">
+    <table class="inventory">
+        <tbody>
+            @if (Model.OrderLines != null)
+            {
+                foreach (var orderLine in @Model.OrderLines)
+                {
+                    <tr>
+                        <td>@orderLine.Name</td>
+                        <td>@Model.PriceFormat.Replace("price", Math.Round(orderLine.Price, Model.DigitsAfterDecimal).ToString(CultureInfo.GetCultureInfo("nl-NL").NumberFormat))</td>
+                        <td>@orderLine.TaxRate.ToString("G29", CultureInfo.GetCultureInfo("nl-NL").NumberFormat)%</td>
+                        <td>@orderLine.Quantity</td>
+                        <td>@Model.PriceFormat.Replace("price", (Math.Round(orderLine.Price, Model.DigitsAfterDecimal) * orderLine.Quantity).ToString(CultureInfo.GetCultureInfo("nl-NL").NumberFormat))</td>
+                    </tr>
+                }
+            }
+            @if (Model.OrderFees != null)
+            {
+                foreach (var orderFee in @Model.OrderFees)
+                {
+                    <tr>
+                        <td>@orderFee.Name</td>
+                        <td>@Model.PriceFormat.Replace("price", Math.Round(orderFee.Price, Model.DigitsAfterDecimal).ToString(CultureInfo.GetCultureInfo("nl-NL").NumberFormat))</td>
+                        <td>@orderFee.TaxRate?.ToString("G29", CultureInfo.GetCultureInfo("nl-NL").NumberFormat)%</td>
+                        <td>1</td>
+                        <td>@Model.PriceFormat.Replace("price", Math.Round(orderFee.Price, Model.DigitsAfterDecimal).ToString(CultureInfo.GetCultureInfo("nl-NL").NumberFormat))</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <table class="balance">
+        <!--<tr>
+            <th>Subtotaal</th>
+            <td>@Model.Subtotal</td>
+        </tr>-->
+        <tr>
+            <th>Verzendkosten</th>
+            <td>@Model.PriceFormat.Replace("price", Math.Round(Model.ShippingCosts, Model.DigitsAfterDecimal).ToString(CultureInfo.GetCultureInfo("nl-NL").NumberFormat))</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <th>Totaal</th>
+            <td>@Model.Total</td>
+        </tr>
+        @if (Model.TaxClasses != null)
+        {
+            foreach (var taxClass in @Model.TaxClasses)
+            {
+                if (decimal.Parse(taxClass.Value.ToString()) > 0)
+                {
+                    <tr>
+                        <td>Waarvan BTW (@decimal.Parse(taxClass.Key).ToString("G29", CultureInfo.GetCultureInfo("nl-NL").NumberFormat)%)</td>
+                        <td><i>@Model.PriceFormat.Replace("price", Math.Round(decimal.Parse(taxClass.Value.ToString()), Model.DigitsAfterDecimal).ToString(CultureInfo.GetCultureInfo("nl-NL").NumberFormat))</i></td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+
+    <!--@if (!string.IsNullOrWhiteSpace(Model.Note))
+    {
+        <table class="notes">
+            <tr>
+                <td>
+                    <h3>Notities</h3>
+                    <p>
+                        @Html.Raw(Html.Encode(Model.Note).Replace("\n", "<br />"))
+                    </p>
+                </td>
+            </tr>
+        </table>
+    }-->
+</body>
+</html>

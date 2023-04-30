@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <base href="/" />
+
+  <!-- FAVICONS -->
+  <meta name="apple-mobile-web-app-title" content="DOMEIN.nl">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="shortcut icon" href="https://DOMEIN.nl/assets/images/favicon/64x64.jpg">
+  <link href="https://DOMEIN.nl/assets/images/favicon/152x152.jpg" rel="apple-touch-icon" type="152x152">
+  <link href="https://DOMEIN.nl/assets/images/favicon/76x76.jpg" rel="apple-touch-icon" sizes="76x76">
+  <link href="https://DOMEIN.nl/assets/images/favicon/120x120.jpg" rel="apple-touch-icon" sizes="120x120">
+  <link href="https://DOMEIN.nl/assets/images/favicon/310x480.jpg" rel="apple-touch-startup-image">
+  <link href="https://DOMEIN.nl/assets/images/favicon/76x76.jpg" rel="apple-touch-icon">
+  <link href="https://DOMEIN.nl/assets/images/favicon/152x152.jpg" rel="apple-touch-icon" sizes="152x152">
+
+  <meta name="msapplication-navbutton-color" content="#ffffff">
+  <meta name="msapplication-tooltip" content="DOMEIN.nl">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="msapplication-name" content="DOMEIN.nl">
+  <meta name="msapplication-square70x70logo" content="https://DOMEIN.nl/assets/images/favicon/70x70.jpg">
+  <meta name="msapplication-square150x150logo" content="https://DOMEIN.nl/assets/images/favicon/150x150.jpg">
+  <meta name="msapplication-wide310x150logo" content="https://DOMEIN.nl/assets/images/favicon/310x150.jpg">
+  <meta name="msapplication-square310x310logo" content="https://DOMEIN.nl/assets/images/favicon/310x310.jpg">
+
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://DOMEIN.nl/assets/images/favicon/1200x630.jpg">
+  <meta property="og:url" content="https://DOMEIN.nl/">
+  <meta property="og:site_name">
+
+  <link rel="preload" href="/assets/fonts/montserrat/montserrat-v12-latin-300.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="/assets/fonts/montserrat/montserrat-v12-latin-500.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="/assets/fonts/montserrat/montserrat-v12-latin-600.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="/assets/fonts/montserrat/montserrat-v12-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="/assets/fonts/lato/lato-v14-latin-300.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="/assets/fonts/lato/lato-v14-latin-700.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="/assets/fonts/lato/lato-v14-latin-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="/assets/fonts/lato/lato-v14-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="/assets/fonts/lato/lato-v14-latin-300.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="/assets/fonts/frank-ruhl-libre/frank-ruhl-libre-v3-latin-300.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="/assets/fonts/frank-ruhl-libre/frank-ruhl-libre-v3-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link id="fonts" rel="preload" href="/assets/css/fonts.css" as="style" />
+
+  <noscript>
+    <link rel="preload" href="/assets/css/fonts.css" as="style" />
+    <link rel="stylesheet" href="/assets/css/fonts.css" as="style" />
+  </noscript>
+
+  <script>
+    // `rel=preload` Polyfill for <link> elements
+    if (typeof window !== 'undefined') {
+      var ua = window.navigator.userAgent;
+      var msie = ua.indexOf("MSIE ");
+      if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  // If Internet Explorer, return version number
+      {
+        // Dynamically load the things that relied on preload.
+        var links = document.getElementsByTagName('link');
+        for (var i = 0; i < links.length; i++) {
+          var link = links[i];
+          // qualify links to those with rel=preload and as=style attrs
+          if (link.rel === 'preload' && link.getAttribute('as') === 'style' || link.rel === 'preload' && link.getAttribute('as') === 'font') {
+            // prevent re-running on link
+            link.setAttribute('rel', 'stylesheet');
+          }
+        }
+      } else {
+        window.addEventListener('load', function () {
+          console.log(document.getElementById('fonts'));
+          document.getElementById('fonts').setAttribute('rel', 'stylesheet');
+        });
+      }
+    }
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-46272209-1"></script>
+  <script>
+    if (typeof window !== 'undefined') {
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'UA-46272209-1', { 'anonymize_ip': true }, { 'forseSSL': true });
+    }
+  </script>-->
+
+
+  <style type="text/css">
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+    body:not([data-loaded]) {
+      height: 100vh;
+
+      overflow: hidden;
+    }
+
+    .app-loading {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #1b1b1b;
+    }
+
+    body[data-loaded='true'] .app-loading {
+      display: none;
+    }
+
+    .app-loading .spinner {
+      height: 200px;
+      width: 200px;
+      animation: rotate 2s linear infinite;
+      transform-origin: center center;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+      .app-loading .spinner .path {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        animation: dash 1.5s ease-in-out infinite;
+        stroke-linecap: round;
+        stroke: #DAA621;
+      }
+
+    .app-loading .logo {
+      width: 66px;
+      height: 28px;
+    }
+
+
+    @keyframes rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes dash {
+      0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+      }
+
+      50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+      }
+
+      100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
+      }
+    }
+  </style>
+</head>
+<body id="body">
+  <app></app>
+
+  <!-- loading layout replaced by app after startupp -->
+  <div class="app-loading">
+    <svg version="1.1" class="logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 610.3 258.7" style="enable-background:new 0 0 610.3 258.7;" xml:space="preserve"><g><path fill="#FFFFFF" d="M0,74.4c11.3-7.2,25.4-11.1,40.4-11.1c27.4,0,45.1,12.2,45.1,57.5c0,74.4-22.4,86.2-41.2,86.2c-10.2,0-17.7-3.6-21.8-7.7v57.5c-3.6,1.4-8,1.9-11.6,1.9C3,258.7,0,256.5,0,249.1V74.4z M22.4,177.7c3.9,6.4,9.4,9.1,14.9,9.1c8.6,0,23.2-6.1,23.2-63.6c0-32.9-7.2-40.4-21.3-40.4c-6.6,0-12.2,1.9-16.9,5.3V177.7z" /><path fill="#FFFFFF" d="M105.6,75.7c10.8-7.5,24-12.4,37.6-12.4c14.1,0,19.3,4.1,19.3,11.6c0,3-0.6,8.6-2.5,13.3c-4.1-2.2-8.6-3.3-13.3-3.3c-6.1,0-13,1.9-18.2,6.4l-0.3,108.6c0,4.4-0.3,4.4-22.7,4.4V75.7z" /><path fill="#FFFFFF" d="M212.8,63.3c29,0,42.8,14.9,42.8,71c0,51.4-15.8,72.7-45.3,72.7c-28.5,0-43.4-9.7-43.4-71.9C167,84.6,183.8,63.3,212.8,63.3z M210.9,188c11.9,0,20.5-10.2,20.5-53.4c0-44-6.4-51.7-19.4-51.7c-12.2,0-20.7,9.7-20.7,52.8C191.3,181.3,198.2,188,210.9,188z" /><path fill="#FFFFFF" d="M354.7,107.8c0,12.2-0.8,26-3,35.9c-19.1,3.6-44.5,4.4-57.8,4.4c1.1,29.3,8.8,37,25.7,37c11.1,0,22.1-3.3,31.5-8.6c1.4,4.1,1.9,10.8,1.9,15.2c0,8.6-17.4,15.2-38.1,15.2c-25.7,0-44.2-10.8-44.2-64.7c0-69.1,24.6-79.1,48.9-79.1C342.8,63.3,354.7,78,354.7,107.8z M294.1,129.9c10.5,0.3,27.6-0.3,37.3-3c1.1-5,1.4-11.3,1.4-16.6c-0.3-19.9-3.9-27.4-15.8-27.4C305.7,82.9,295.8,92.6,294.1,129.9z" /><path fill="#FFFFFF" d="M365.2,85.1c0-17.7,0-19.1,5.8-19.1h13.3V49.5C384.2,6.6,409.7,0,430.7,0c16.9,0,25.7,4.4,25.7,11.3c0,3.9-0.8,8.6-2.5,12.4c-6.6-2.8-13.5-3.3-19.6-3.3c-14.4,0-27.6,3.3-27.6,27.1v18.5h24.9c0,17.7-0.3,19.1-4.7,19.1h-20.2v114.7c0,0.6-0.3,4.4-4.4,4.4h-18V85.1H365.2z" /><path fill="#DAA621" d="M444.8,174.1c11.3,0,15.5,6.6,15.5,16c0,8.8-5.8,15.8-15.5,15.8c-11.6,0-15.5-5.8-15.5-15.8C429.3,181.6,434.8,174.1,444.8,174.1z" /><path fill="#DAA621" d="M482.1,72.7c10.8-4.7,29-9.4,43.7-9.4c29,0,39,10.2,39,37v99.5c0,4.4-0.6,4.4-23.2,4.4V107c0-17.4-2.8-24-16.6-24c-5.8,0-14.4,1.7-20.5,5v112c0,4.4-0.6,4.4-22.4,4.4V72.7z" /><path fill="#DAA621" d="M610.3,199.9c0,4.4,0,4.4-22.4,4.4V11.3c0-10.2,4.4-10.2,22.4-10.2V199.9z" /></g></svg>
+    <svg class="spinner" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
+  </div>
+</body>
+</html>

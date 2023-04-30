@@ -1,0 +1,260 @@
+.video-header {
+    overflow: hidden;
+
+    background-position: center;
+    background-size: cover;
+}
+
+.video-header {
+    position: relative;
+
+    width: 100%;
+    height: calc(100vh - 114px);
+}
+
+  .video-header .btn {
+    font-size: 14px;
+
+    margin-top: 30px;
+    padding: 12px 29px !important;
+
+    box-sizing: border-box;
+  }
+
+    .video-header .btn img {
+      width: 20px;
+      height: 17px;
+      margin-right: 12px;
+    }
+
+    .video-header .btn img {
+      width: 20px;
+      height: 17px;
+      margin-right: 12px;
+    }
+
+  .video-header video {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background-size: cover
+  }
+
+    .video-header .video-bottle,
+    .video-header:before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        content: " ";
+    }
+
+    .video-header .video-bottle {
+        background-repeat: no-repeat;
+        background-size: auto calc(100vh - 47px);
+        background-position: bottom -110px center;
+    }
+
+    .video-header .arrow {
+        position: absolute;
+        bottom: 67px;
+        left: 50%;
+        z-index: 1
+    }
+
+        .video-header .arrow svg {
+            width: 25px;
+            height: 24px;
+            margin-left: -12px;
+            fill: #ffffff;
+        }
+
+    .video-header h2 {
+        color: #fff;
+        font-family: 'Frank Ruhl Libre', sans-serif;
+        font-weight: 400;
+        font-size: 33px;
+        line-height: 40px;
+        letter-spacing: 0px;
+
+        padding: 0 30px;
+        margin-bottom: 21px;
+    }
+
+    .video-header p {
+        color: #ffffff;
+        font-family: 'Lato', sans-ser;
+        font-weight: 400;
+        font-size: 18px;
+
+        margin-bottom: 0
+    }
+
+      .video-header p b {
+        color: #ffffff;
+        font-size: 20px;
+      }
+
+    .video-header .inside {
+        z-index: 1;
+        width: 100%;
+        top: 44%;
+        left: 50%;
+        -ms-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        position: absolute;
+        text-align: center
+    }
+
+.bounce {
+    -moz-animation: bounce 3s infinite;
+    -webkit-animation: bounce 3s infinite;
+    animation: bounce 3s infinite;
+}
+
+@-moz-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        -moz-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    40% {
+        -moz-transform: translateY(-30px);
+        transform: translateY(-30px);
+    }
+
+    60% {
+        -moz-transform: translateY(-15px);
+        transform: translateY(-15px);
+    }
+}
+
+@-webkit-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    40% {
+        -webkit-transform: translateY(-30px);
+        transform: translateY(-30px);
+    }
+
+    60% {
+        -webkit-transform: translateY(-15px);
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    40% {
+        -moz-transform: translateY(-30px);
+        -ms-transform: translateY(-30px);
+        -webkit-transform: translateY(-30px);
+        transform: translateY(-30px);
+    }
+
+    60% {
+        -moz-transform: translateY(-15px);
+        -ms-transform: translateY(-15px);
+        -webkit-transform: translateY(-15px);
+        transform: translateY(-15px);
+    }
+}
+
+@media (max-width: 1400px) {
+    .video-header {
+        height: calc(100vh - 93px);
+    }
+
+        .video-header h2 {
+            font-size: 27px;
+            line-height: 34px;
+            
+            margin-bottom: 18px;
+        }
+
+        .video-header p {
+            font-size: 15px;
+        }
+
+        .video-header .arrow { bottom: 55px; }
+
+            .video-header .arrow svg {
+                width: 21px;
+                height: 11px;
+            }
+
+      .video-header .btn {
+        font-size: 12px;
+
+        margin-top: 26px;
+        padding: 10px 25px !important;
+
+        box-sizing: border-box;
+      }
+
+        .video-header .btn img {
+          width: 16px;
+          height: 14px;
+          margin-right: 9px;
+        }
+}
+
+@media only screen and (max-width:991.5px) {
+    .video-header {
+        height: calc(100vh - 78px);
+    }
+}
+
+@media only screen and (max-width:767.5px) {
+    .video-header .inside {
+        width: 100%
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .video-header .video-bottle {
+        background-position: bottom -70px center;
+    }
+
+    .video-header .inside {
+        margin-top: -15px
+    }
+
+        .video-header .inside p {
+            font-size: 14px;
+            line-height: 18px;
+            margin-bottom: 10px
+        }
+
+    .video-header h2 {
+        font-size: 26px;
+        line-height: 36px;
+
+        margin-bottom: 20px;
+    }
+
+    .video-header .arrow {
+        bottom: 10vh;
+    }
+}

@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="owl-carousel owl-theme categories-carousel">
+        <ng-container *ngFor="let i of res">
+            <div class="item categories-carousel-item" *ngIf="i.product !== undefined && i.resources.display === 'true'">
+              <div class="categories-carousel-image fp-cc-lazy" [attr.data-src]="i.files.hlcBg[0].compressedPath" [attr.alt]="i.files.hlcBg ? i.files.hlcBg[0].alt : null">
+                <img class="fp-cc-lazy" *ngIf="i.files.hlcImage" [attr.data-src]="i.files.hlcImage[0].compressedPath" [attr.alt]="i.files.hlcImage[0].alt" />
+              </div>
+                <div class="categories-carousel-overlay">
+                    <div class="categories-carousel-inner">
+                        <span class="categories-carousel-title">{{ i.resources.title }}</span>
+                        <p>{{ i.resources.catDescription }}</p>
+                        <div class="categories-carousel-prices" *ngIf="i.product">
+                            <span class="categories-carousel-old-price" *ngIf="i.product.promo">{{ i.product.price }}</span>
+                            <span class="categories-carousel-price" *ngIf="i.product.promo">{{ i.product.promoPrice }}</span>
+                            <span class="categories-carousel-price" *ngIf="!i.product.promo">{{ i.product.price }}</span>
+                        </div>
+                        <a [routerLink]="i.url" class="btn btn-primary">Pakket bekijken</a>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
+

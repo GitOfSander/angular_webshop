@@ -1,0 +1,63 @@
+<section class="container categories">
+  <div class="row">
+    <div class="categories-item col-lg-4 col-md-6" *ngFor="let i of res.data.products" ngsReveal>
+      <div>
+        <div class="categories-image">
+          <img class="lazy" *ngIf="i.files.pImage" [attr.data-src]="i.files.pImage[0].compressedPath" [attr.alt]="i.files.pImage[0].alt" />
+        </div>
+        <div class="categories-overlay">
+          <div class="categories-inner">
+            <div>
+              <span class="categories-title">{{ i.resources.title }}</span>
+            </div>
+            <div>
+              <p>{{ i.resources.subtitle }}</p>
+              <div class="categories-prices">
+                <span class="categories-old-price" *ngIf="i.promo">{{ i.price }}</span>
+                <span class="categories-price" *ngIf="i.promo">{{ i.promoPrice }}</span>
+                <span class="categories-price" *ngIf="!i.promo">{{ i.price }}</span>
+              </div>
+              <a [routerLink]="[i.pageUrl]" class="btn btn-primary">Bekijken</a>
+              <button id="addProduct" class="btn btn-primary" [disabled]="buyDisabled" (click)="showModal(i.files.pImage, i.resources.title, i.id)" *ngIf="i.manageStock && i.stockQuantity != 0 || !i.manageStock && i.stockStatus != 'out'">
+                Voeg toe
+                <img src="/assets/svg/winkelmandje.svg" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal fade pm" id="productModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header pm-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body pm-body" style="height: 100%;">
+        <div>
+          <img *ngIf="image" [attr.src]="image[0].compressedPath" [attr.alt]="image[0].alt" />
+        </div>
+        <div>
+          <div>
+            <span class="pm-title">Je hebt een product toegevoegd aan je winkelmandje</span>
+            <span class="pm-subtitle">1x {{ title }}</span>
+          </div>
+          <div>
+            <div class="row">
+              <div class="col-7">
+                <a class="btn btn-link" data-dismiss="modal">Verder winkelen</a>
+              </div>
+              <div class="col-5 text-right">
+                <a class="btn btn-success btn-block" data-dismiss="modal" [routerLink]="checkoutUrl">Afrekenen</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

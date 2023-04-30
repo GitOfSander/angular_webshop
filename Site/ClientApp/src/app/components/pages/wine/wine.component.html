@@ -1,0 +1,42 @@
+<highlight-features [res]="res" [website]="website"></highlight-features>
+
+<breadcrumbs [breadcrumbs]="res.data.wineCategory.breadcrumbs" [title]="res.data.wineCategory.title"></breadcrumbs>
+
+<section class="container-fluid wine" *ngFor="let i of res.data.wines">
+  <div class="row wine-header lazy" [attr.data-src]="i.files.background && i.files.background[0].compressedPath" [attr.title]="i.files.background ? i.files.background[0].alt : null">
+    <div class="col-md-6 order-md-12" ngsReveal>
+      <div class="wine-inner">
+        <h2>{{ i.title }}</h2>
+        <h3>{{ i.subtitle }}</h3>
+      </div>
+    </div>
+    <div class="col-md-6 order-md-1" ngsReveal>
+      <img class="lazy" *ngIf="i.files.image" [attr.data-src]="i.files.image[0].compressedPath" [attr.alt]="i.files.image[0].alt" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="container">
+      <div class="row" ngsReveal>
+        <div class="col-md-12">
+          <span class="wine-title">{{ i.title }}</span>
+        </div>
+      </div>
+
+      <div class="row" ngsReveal>
+        <div class="col-md-4 offset-md-1 order-md-12">
+          <ul class="wine-details">
+            <li class="wine-country">{{ i.resources.country }}</li>
+            <li class="wine-fruit">{{ i.resources.fruit }}</li>
+            <li class="wine-year">{{ i.resources.year }}</li>
+            <li class="wine-producer">{{ i.resources.producer }}</li>
+          </ul>
+        </div>
+        <div class="col-md-7 order-md-1 text text-left" [innerHTML]="i.htmlEditor">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer [website]="website"></footer>

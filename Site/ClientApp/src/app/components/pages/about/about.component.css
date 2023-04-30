@@ -1,0 +1,94 @@
+﻿/* About */
+
+.about-intro {
+    padding-top: 110px;
+    padding-bottom: 100px
+}
+
+.beginners {
+    overflow: hidden;
+
+    background-size: 50%;
+    background-repeat: no-repeat;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.beginners-image {
+    display: none;
+}
+
+.beginners-text {
+    position: relative;
+
+    padding: 86px 15px 123px 87px;
+}
+
+    .beginners-text:before {
+        position: absolute;
+        top: 0;
+        right: -2000px;
+        bottom: 0;
+        left: 0;
+
+        content: ' ';
+        z-index: 0;
+
+        background: #fcfcfc;
+    }
+
+.beginners-inner {
+    position: relative;
+
+    z-index: 1;
+}
+
+.test-nights {
+    padding-top: 128px;
+    padding-bottom: 90px;
+
+    background-color: #ffffff;
+}
+
+@media (max-width: 1400px) {
+    .about-intro {
+        padding-top: 100px;
+        padding-bottom: 100px
+    }
+
+    .beginners-text {
+        padding: 70px 15px 110px 68px;
+    }
+
+    .test-nights {
+        padding-top: 112px;
+        padding-bottom: 82px;
+    }
+}
+
+@media (max-width: 991.5px) {
+    .beginners {
+        background-image: none !important;
+    }
+
+    .beginners-image {
+        display: block;
+    }
+
+    .beginners-text {
+        padding: 8vw 4vw 8vw 4vw;
+    }
+
+        .beginners-text:before {
+            left: -2000px;
+        }
+
+    .about-intro {
+        height: auto;
+        padding: 14vw 4vw;
+    }
+
+    .test-nights {
+        padding: 14vw 4vw 11vw 4vw
+    }
+}

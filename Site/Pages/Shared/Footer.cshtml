@@ -1,0 +1,39 @@
+﻿@model Site.Models.ViewModels.PdfViewModel
+@{
+    Layout = null;
+}
+
+<style>
+    footer {
+        color: #ffffff;
+        font: 16px/1 'Open Sans', sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        line-height: 28px;
+        width: 100%;
+        padding: 27px 0 16mm 0;
+        background-color: #1b1b1b;
+    }
+
+        footer address {
+            font-style: normal;
+        }
+
+    body {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+</style>
+
+<style>
+    @@media print {
+        background: #ffffff !important;
+    }
+</style>
+
+<footer>
+    <address>@Model.Website,    @Model.AddressLine1,  @Model.ZipCode  @Model.City,  @Model.Country</address>
+    <label>KvK nr:  @Model.Coc / BTW nr:  @Model.Vat</label>
+</footer>

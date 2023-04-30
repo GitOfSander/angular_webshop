@@ -1,0 +1,36 @@
+<highlight-features [res]="res" [website]="website"></highlight-features>
+
+<breadcrumbs [breadcrumbs]="res.page.breadcrumbs" [title]="res.page.resources.title"></breadcrumbs>
+
+<section class="container-fluid category-header lazy" [attr.data-src]="res.page.files.header[0].compressedPath" [attr.alt]="res.page.files.header ? res.page.files.header[0].alt : null">
+  <div class="row">
+    <div class="order-md-12 col-md-6" ngsReveal>
+      <div class="category-inner">
+        <h2 [ngStyle]="res.page.resources.textColor && {'color': res.page.resources.textColor }">{{ res.page.resources.cTitle }}</h2>
+        <h3>{{ res.page.resources.cSubtitle }}</h3>
+        <div class="category-prices">
+          <span class="category-old-price" *ngIf="res.page.product.promo">{{  res.page.product.price }}</span>
+          <span class="category-price" [ngStyle]="res.page.resources.textColor && {'color': res.page.resources.textColor }" *ngIf="res.page.product.promo">{{ res.page.product.promoPrice }}</span>
+          <span class="category-price" [ngStyle]="res.page.resources.textColor && {'color': res.page.resources.textColor }" *ngIf="!res.page.product.promo">{{  res.page.product.price }}</span>
+        </div>
+        <div class="category-text" [innerHTML]="res.page.resources.cText" [ngStyle]="res.page.resources.textColor && {'color': res.page.resources.textColor }"></div>
+      </div>
+    </div>
+    <div class="order-md-1 col-md-6 category-image" ngsReveal>
+      <img class="lazy" *ngIf="res.page.files.image" [attr.data-src]="res.page.files.image[0].compressedPath" [attr.alt]="res.page.files.image[0].alt" />
+    </div>
+  </div>
+</section>
+
+<div class="category">
+    <section class="container-fluid text category-intro">
+        <div class="row">
+            <div class="col-md-6 offset-md-3" ngsReveal [innerHTML]="res.page.resources.text">
+            </div>
+        </div>
+    </section>
+
+    <products [res]="res"></products>
+</div>
+
+<footer [website]="website"></footer>

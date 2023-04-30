@@ -1,0 +1,69 @@
+.page-header {
+    padding-top: 45px;
+    padding-bottom: 45px;
+
+    background-color: #fcfcfc;
+    border-bottom: 1px solid #ececec;
+}
+
+    .page-header h1 { margin-bottom: 0; }
+
+    .page-header .breadcrumb {
+        padding: 0;
+        margin-bottom: 6px;
+
+        background-color: transparent;
+    }
+
+    .page-header .breadcrumb-item {
+        color: #daa520;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 21px;
+        text-transform: uppercase;
+    }
+
+        .page-header .breadcrumb-item a {
+            color: #a7a7a7;
+        }
+
+        .page-header .breadcrumb-item:last-of-type a {
+            color: #daa520;
+        }
+
+        .page-header .breadcrumb-item + .breadcrumb-item {
+            padding-left: 6px;
+        }
+
+            .page-header .breadcrumb-item + .breadcrumb-item::before {
+                content: '>';
+
+                color: #a7a7a7;
+                 
+                padding-right: 6px;
+            }
+
+
+@media (max-width: 1400px) {
+    .page-header {
+        padding-top: 35px;
+        padding-bottom: 35px;
+    }
+
+        .page-header .breadcrumb {
+            margin-bottom: 4px;
+        }
+
+        .page-header .breadcrumb-item {
+            font-size: 11px;
+            line-height: 19px;
+        }
+
+            .page-header .breadcrumb-item + .breadcrumb-item {
+                padding-left: 4px;
+            }
+
+                .page-header .breadcrumb-item + .breadcrumb-item::before {
+                    padding-right: 4px;
+                }
+}

@@ -1,0 +1,7 @@
+<navigation [res]="res" [website]="website"></navigation>
+
+<main>
+  <div [@routerAnimation]="getRouteAnimation(route)">
+    <router-outlet #route="outlet"></router-outlet>
+  </div>
+</main>

@@ -1,0 +1,17 @@
+﻿/* Clean category */
+
+body.category main {
+    background-color: #ffffff;
+}
+
+div.clean-category {
+    padding-top: 5.403vw;
+
+    padding-bottom: 28.4vw;
+
+    background-color: #ffffff;
+    background-image: url(/assets/images/background_image.jpg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}

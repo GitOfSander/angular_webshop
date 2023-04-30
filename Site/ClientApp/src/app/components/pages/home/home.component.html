@@ -1,0 +1,155 @@
+<!--<ngx-json-ld [json]="schema"></ngx-json-ld>-->
+
+<a class="on-btn" [routerLink]="continueShoppingUrl">
+  <div></div>
+  <span>BESTEL DIRECT</span>
+</a>
+
+<div id="fullpage">
+    <section>
+        <highlight-features [res]="res" [website]="website"></highlight-features>
+        <header [res]="res"></header>
+    </section>
+
+    <section class="container-fluid intro" id="skip">
+      <div ngsReveal>
+        <div class="row inner text">
+          <div class="col-md-6 offset-md-3">
+            <div [innerHTML]="res.page.resources.iText"></div>
+          </div>
+        </div>
+
+        <categories-carousel [res]="res.data.categories"></categories-carousel>
+      </div>
+    </section>
+
+    <section class="container-fluid the-box">
+        <div class="row" ngsReveal>
+            <div class="col-lg-5 offset-lg-1 the-box-text text text-left">
+                <div>
+                    <div [innerHTML]="res.page.resources.bText"></div>
+                    <div>
+                        <div class="the-box-item">
+                            <span>{{ res.page.resources.inTitle }}</span>
+                            <p>{{ res.page.resources.inSubtitle }}</p>
+                        </div>
+                        <div class="the-box-item">
+                            <span>{{ res.page.resources.wbTitle }}</span>
+                            <p>{{ res.page.resources.wbSubtitle }}</p>
+                        </div>
+                        <div class="the-box-item">
+                            <span>{{ res.page.resources.cTitle }}</span>
+                            <p>{{ res.page.resources.cSubtitle }}</p>
+                        </div>
+                        <div class="the-box-item">
+                            <span>{{ res.page.resources.sTitle }}</span>
+                            <p>{{ res.page.resources.sSubtitle }}</p>
+                        </div>
+                        <div class="the-box-item">
+                            <span>{{ res.page.resources.psTitle }}</span>
+                            <p>{{ res.page.resources.psSubtitle }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 the-box-video d-none d-lg-block">
+                <div [innerHTML]="bVidHtml"></div>
+            </div>
+            <div class="col-lg-6 the-box-video d-md-block d-lg-none" (click)="playBoxVideo($event)" *ngIf="res.page.files.tVideoMob">
+                <div class="the-box-video-text">
+                    <span>{{ res.page.resources.ibvTitle }}</span>
+                    <p>{{ res.page.resources.ibvSubtitle }}</p>
+                </div>
+                <video data-ignore id="vidMob2" class="embed-responsive-item fp-lazy" muted [attr.data-poster]="res.page.files.bPosterMob ? res.page.files.bPosterMob[0].compressedPath : null" [attr.title]="res.page.files.bPosterMob ? res.page.files.bPosterMob[0].alt : null">
+                    <ng-container *ngFor="let i of res.page.files.bVideoMob">
+                        <source [attr.data-src]="i.originalPath" [attr.type]="getVideoType(i.originalPath)">
+                    </ng-container>
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid connoisseur">
+        <div class="row" ngsReveal>
+            <div class="col-lg-5 order-lg-12 connoisseur-text text text-left">
+                <div>
+                    <div [innerHTML]="res.page.resources.tasText"></div>
+                    <div>
+                        <div class="connoisseur-item">
+                            <p>{{ res.page.resources.eyeText }}</p>
+                        </div>
+                        <div class="connoisseur-item">
+                            <p>{{ res.page.resources.noseText }}</p>
+                        </div>
+                        <div class="connoisseur-item">
+                            <p>{{ res.page.resources.glassText }}</p>
+                        </div>
+                        <div class="connoisseur-item">
+                            <p>{{ res.page.resources.twText }}</p>
+                        </div>
+                        <div class="connoisseur-item">
+                            <p>{{ res.page.resources.wbText }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 order-lg-1 connoisseur-video d-none d-lg-block">
+                <div [innerHTML]="tVidHtml"></div>
+            </div>
+            <div class="col-lg-6 order-lg-1 connoisseur-video d-md-block d-lg-none" (click)="playTasteVideo($event)" *ngIf="res.page.files.tVideoMob">
+                <div class="connoisseur-video-text">
+                    <span>{{ res.page.resources.tvTitle }}</span>
+                    <p>{{ res.page.resources.tvSutitle }}</p>
+                </div>
+                <video data-ignore id="vidMob3" class="embed-responsive-item fp-lazy" muted [attr.data-poster]="res.page.files.tPosterMob ? res.page.files.tPosterMob[0].compressedPath : null" [attr.title]="res.page.files.tPosterMob ? res.page.files.tPosterMob[0].alt : null">
+                    <ng-container *ngFor="let i of res.page.files.tVideoMob">
+                        <source [attr.data-src]="i.originalPath" [attr.type]="getVideoType(i.originalPath)">
+                    </ng-container>
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid champaigne text fp-lazy" data-src="/assets/images/background_champagne.jpg">
+        <div class="row" ngsReveal>
+            <div class="col-lg-4 offset-lg-2 champaigne-text text-left">
+                <div [innerHTML]="res.page.resources.chamText"></div>
+                <div>
+                    <div class="champaigne-item">
+                        <span>{{ res.page.resources.giftTitle }}</span>
+                        <p>{{ res.page.resources.giftSubtitle }}</p>
+                    </div>
+                    <div class="champaigne-item">
+                        <span>{{ res.page.resources.heartTitle }}</span>
+                        <p>{{ res.page.resources.heartSubtitle }}</p>
+                    </div>
+                </div>
+                <a class="btn btn-default" [routerLink]="res.page.resources.cLink">Bekijk champagnecadeau</a>
+            </div>
+            <div class="col-lg-6 champaigne-image">
+                <div class="champaigne-prices">
+                    <div>
+                        <span class="champaigne-old-price">{{ res.page.resources.cPrice }}</span>
+                        <span class="champaigne-price">{{ res.page.resources.cpPrice }}</span>
+                    </div>
+                </div>
+                <img class="fp-lazy" *ngIf="res.page.files.cBottle" [attr.data-src]="res.page.files.cBottle[0].compressedPath" [attr.alt]="res.page.files.cBottle[0].alt" />
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid text about">
+      <div ngsReveal>
+        <div class="row inner">
+          <div class="col-md-6 offset-md-3" [innerHTML]="res.page.resources.abText">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="image fp-lazy" [attr.data-src]="res.page.files.abBg && res.page.files.abBg[0].compressedPath" [attr.title]="res.page.files.abBg ? res.page.files.abBg[0].alt : null"></div>
+        </div>
+      </div>
+    </section>
+</div>
+
+<footer [website]="website"></footer>

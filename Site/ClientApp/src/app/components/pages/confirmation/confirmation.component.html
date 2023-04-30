@@ -1,0 +1,12 @@
+<highlight-features [res]="res" [website]="website"></highlight-features>
+
+<div class="container-fluid confirm" [ngStyle]="bg && {'background-image': 'url(\'' + bg[0].compressedPath + '\')'}" [attr.alt]="bg ? bg[0].alt : null">
+    <div class="row inner" ngsReveal>
+        <div class="col-md-6 offset-md-3">
+            <div [innerHTML]="svg"></div>
+            <h1 [innerHtml]="title"></h1>
+            <div [innerHTML]="text"></div>
+            <a class="btn btn-default" [routerLink]="res.links['a9965b7e-27f6-435b-b033-25c5a8146609']">Terug naar de website</a>
+        </div>
+    </div>
+</div>

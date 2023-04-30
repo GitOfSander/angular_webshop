@@ -1,0 +1,118 @@
+<highlight-features [res]="res" [website]="website"></highlight-features>
+
+<breadcrumbs [breadcrumbs]="res.data.product.breadcrumbs" [title]="res.data.product.resources.title"></breadcrumbs>
+
+<ngx-json-ld [json]="schema"></ngx-json-ld>
+
+<section class="product-info lazy" [attr.data-src]="res.data.product.files.texture[0].compressedPath" [attr.alt]="res.data.product.files.texture ? res.data.product.files.texture[0].alt : null">
+  <div class="product-image">
+    <div class="owl-carousel owl-theme product-carousel" [innerHtml]="carHtml">
+
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-6 product-text text text-left">
+        <div class="product-inner" ngsReveal>
+          <h2>{{ res.data.product.resources.exTitle }}</h2>
+          <span class="product-subtitle">{{ res.data.product.resources.inPackage }}</span>
+
+          <div class="row">
+            <div class="col-5">
+              <span class="product-old-price" *ngIf="res.data.product.promo">{{ res.data.product.price }}</span>
+              <span class="product-price" *ngIf="res.data.product.promo">{{ res.data.product.promoPrice }}</span>
+              <span class="product-price" *ngIf="!res.data.product.promo">{{ res.data.product.price }}</span>
+            </div>
+            <div class="col-7">
+              <button class="btn btn-success btn-block" [disabled]="buyDisabled" (click)="showModal(res.data.product.files.pImage, res.data.product.resources.title, res.data.product.id)">
+                In mijn mandje
+                <img src="/assets/svg/winkelmandje.svg" />
+              </button>
+            </div>
+          </div>
+
+          <div class="row product-message" *ngIf="res.data.product.manageStock && res.data.product.stockQuantity == 0 && res.data.product.backorders == 'notify' || !res.data.product.manageStock && res.data.product.stockStatus == 'backorder'">
+            <div class="col-12">
+              Bestellen van dit product is mogelijk, maar is momenteel niet op voorraad.
+            </div>
+          </div>
+
+          <div class="row product-message" *ngIf="res.data.product.manageStock && res.data.product.stockQuantity == 0 && res.data.product.backorders == 'no' || !res.data.product.manageStock && res.data.product.stockStatus == 'out'">
+            <div class="col-12">
+              Product is niet meer op voorraad.
+            </div>
+          </div>
+
+          <div class="row product-message" *ngIf="productRemoved">
+            <div class="col-12">
+              Product is niet meer beschikbaar.
+            </div>
+          </div>
+
+          <div class="row product-message" *ngIf="res.data.product.maxPerOrder > 0">
+            <div class="col-12">
+              Er is een maximaal aantal van {{ res.data.product.maxPerOrder }} per order ingesteld op dit product.
+            </div>
+          </div>
+
+          <div class="row" *ngIf="res.data.product.resources.btnText !== '' && res.data.product.resources.btnLink !== ''">
+            <div class="col-md-12">
+              <a class="btn btn-info btn-block" [routerLink]="[res.data.product.resources.btnLink]">{{ res.data.product.resources.btnText }}</a>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 product-checks">
+              <span *ngIf="res.page.resources.cmFirst">{{ res.page.resources.cmFirst }}</span>
+              <span *ngIf="res.page.resources.cmSecond">{{ res.page.resources.cmSecond }}</span>
+            </div>
+          </div>
+
+          <div [innerHTML]="res.data.product.resources.description"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section [attr.class]="vidHtml ? 'container-fluid' : 'container-fluid d-none'" (click)="playVideo($event)">
+  <div class="row">
+    <div class="col-12 product-video">
+      <div [innerHTML]="vidHtml"></div>
+    </div>
+  </div>
+</section>
+
+<footer [website]="website"></footer>
+
+<div class="modal fade pm" id="productModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header pm-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body pm-body" style="height: 100%;">
+        <div>
+          <img *ngIf="image" src="{{ image[0].compressedPath }}" alt="{{ image[0].alt }}" />
+        </div>
+        <div>
+          <div>
+            <span class="pm-title">Je hebt een product toegevoegd aan je winkelmandje</span>
+            <span class="pm-subtitle">1x {{ title }}</span>
+          </div>
+          <div>
+            <div class="row">
+              <div class="col-7">
+                <a class="btn btn-link" data-dismiss="modal">Verder winkelen</a>
+              </div>
+              <div class="col-5 text-right">
+                <a class="btn btn-success btn-block" data-dismiss="modal" [routerLink]="checkoutUrl">Afrekenen</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

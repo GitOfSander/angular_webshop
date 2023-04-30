@@ -1,0 +1,208 @@
+﻿@model Site.Models.ViewModels.PdfViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body style="width: 100%;">
+    <style>
+        body {
+            font: 16px/1 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        td.billingAddress,
+        td.deliveryAddress,
+        td.details {
+            width: 33.3333%;
+            font-size: 16px;
+            line-height: 26px;
+        }
+
+            td.details table {
+                border-collapse: collapse;
+                border-style: hidden;
+            }
+
+                td.details table th,
+                td.details table td {
+                    position: relative;
+                    padding: 0;
+                    text-align: left;
+                    border: 9px solid #ffffff;
+                    border-top: 3px solid #ffffff !important;
+                    border-bottom: 3px solid #ffffff !important;
+                }
+
+                td.details table td {
+                    width: auto;
+                    padding-right: 0 !important;
+                    border-right: 0 !important;
+                }
+
+            td.billingAddress b,
+            td.deliveryAddress b,
+            td.details b {
+                font-weight: 600;
+            }
+
+        table.inventory {
+            clear: both;
+            font-size: 16px;
+            line-height: 24px;
+            width: 210.8mm;
+            margin: 0 26mm;
+            padding: 0;
+            border-collapse: collapse;
+            border-style: hidden;
+        }
+
+            table.inventory thead {
+                width: 100%;
+            }
+
+            table.inventory th {
+                font-weight: bold;
+                text-align: left;
+                border: 13px solid #ffffff;
+                border-top: 7px solid #ffffff !important;
+                border-bottom: 7px solid #ffffff !important;
+            }
+
+                table.inventory th:nth-child(1) {
+                    width: 35%;
+                }
+
+                table.inventory th:nth-child(2) {
+                    text-align: right;
+                    width: 15%;
+                }
+
+                table.inventory th:nth-child(3) {
+                    text-align: right;
+                    width: 15%;
+                }
+
+                table.inventory th:nth-child(4) {
+                    text-align: right;
+                    width: 16%;
+                }
+
+                table.inventory th:nth-child(5) {
+                    text-align: right;
+                    width: 19%;
+                }
+    </style>
+
+    <style>
+        @@media print {
+            background: #ffffff !important;
+        }
+    </style>
+
+    <table style="width: 100%; padding-bottom: 0; height: 503px !important; border: none; margin: 0; padding: 0; border-collapse: collapse;">
+        <tr style="background-color: #1b1b1b; height: 120px;">
+            <td colspan="3" align="left" valign="top" style="padding: 65px 26mm 0 26mm; border: none;">
+                <svg width="90px" height="38px" xml:space="preserve" xmlns:xlink="http://www.w3.org/1999/xlink" id="Layer_1" style="enable-background:new 0 0 610.3 258.7;" version="1.1" viewBox="0 0 610.3 258.7" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px"><g><path d="M0,74.4c11.3-7.2,25.4-11.1,40.4-11.1c27.4,0,45.1,12.2,45.1,57.5c0,74.4-22.4,86.2-41.2,86.2c-10.2,0-17.7-3.6-21.8-7.7v57.5c-3.6,1.4-8,1.9-11.6,1.9C3,258.7,0,256.5,0,249.1V74.4z M22.4,177.7c3.9,6.4,9.4,9.1,14.9,9.1c8.6,0,23.2-6.1,23.2-63.6c0-32.9-7.2-40.4-21.3-40.4c-6.6,0-12.2,1.9-16.9,5.3V177.7z" fill="#FFFFFF"></path><path d="M105.6,75.7c10.8-7.5,24-12.4,37.6-12.4c14.1,0,19.3,4.1,19.3,11.6c0,3-0.6,8.6-2.5,13.3c-4.1-2.2-8.6-3.3-13.3-3.3c-6.1,0-13,1.9-18.2,6.4l-0.3,108.6c0,4.4-0.3,4.4-22.7,4.4V75.7z" fill="#FFFFFF"></path><path d="M212.8,63.3c29,0,42.8,14.9,42.8,71c0,51.4-15.8,72.7-45.3,72.7c-28.5,0-43.4-9.7-43.4-71.9C167,84.6,183.8,63.3,212.8,63.3z M210.9,188c11.9,0,20.5-10.2,20.5-53.4c0-44-6.4-51.7-19.4-51.7c-12.2,0-20.7,9.7-20.7,52.8C191.3,181.3,198.2,188,210.9,188z" fill="#FFFFFF"></path><path d="M354.7,107.8c0,12.2-0.8,26-3,35.9c-19.1,3.6-44.5,4.4-57.8,4.4c1.1,29.3,8.8,37,25.7,37c11.1,0,22.1-3.3,31.5-8.6c1.4,4.1,1.9,10.8,1.9,15.2c0,8.6-17.4,15.2-38.1,15.2c-25.7,0-44.2-10.8-44.2-64.7c0-69.1,24.6-79.1,48.9-79.1C342.8,63.3,354.7,78,354.7,107.8z M294.1,129.9c10.5,0.3,27.6-0.3,37.3-3c1.1-5,1.4-11.3,1.4-16.6c-0.3-19.9-3.9-27.4-15.8-27.4C305.7,82.9,295.8,92.6,294.1,129.9z" fill="#FFFFFF"></path><path d="M365.2,85.1c0-17.7,0-19.1,5.8-19.1h13.3V49.5C384.2,6.6,409.7,0,430.7,0c16.9,0,25.7,4.4,25.7,11.3c0,3.9-0.8,8.6-2.5,12.4c-6.6-2.8-13.5-3.3-19.6-3.3c-14.4,0-27.6,3.3-27.6,27.1v18.5h24.9c0,17.7-0.3,19.1-4.7,19.1h-20.2v114.7c0,0.6-0.3,4.4-4.4,4.4h-18V85.1H365.2z" fill="#FFFFFF"></path><path d="M444.8,174.1c11.3,0,15.5,6.6,15.5,16c0,8.8-5.8,15.8-15.5,15.8c-11.6,0-15.5-5.8-15.5-15.8C429.3,181.6,434.8,174.1,444.8,174.1z" fill="#DAA621"></path><path d="M482.1,72.7c10.8-4.7,29-9.4,43.7-9.4c29,0,39,10.2,39,37v99.5c0,4.4-0.6,4.4-23.2,4.4V107c0-17.4-2.8-24-16.6-24c-5.8,0-14.4,1.7-20.5,5v112c0,4.4-0.6,4.4-22.4,4.4V72.7z" fill="#DAA621"></path><path d="M610.3,199.9c0,4.4,0,4.4-22.4,4.4V11.3c0-10.2,4.4-10.2,22.4-10.2V199.9z" fill="#DAA621"></path></g></svg>
+            </td>
+        </tr>
+        <tr style="height: 20px;"><td colspan="3"></td></tr>
+        <tr>
+            <td style="padding: 20px 0 0px 26mm; width: 112mm; line-height: 26px;" colspan="1" align="left" valign="top" class="billingAddress">
+                <b>Factuuradres:</b><br /><br />
+                @{
+                    if (!string.IsNullOrWhiteSpace(@Model.BillingCompany))
+                    {
+                        @Model.BillingCompany<br />
+                    }
+                }
+                T.a.v. @Model.BillingName<br />
+                @Model.BillingAddressLine1<br />
+                @if (!string.IsNullOrWhiteSpace(@Model.BillingAddressLine2))
+                {
+                    @Model.BillingAddressLine2<br />
+                }
+                @Model.BillingZipCode @Model.BillingCity @if (!string.IsNullOrWhiteSpace(@Model.BillingState))
+                {
+                    @:, @Model.BillingState
+                }<br />
+                <!-- @Model.BillingCountry<br /><br />
+                @{
+                    if (!string.IsNullOrWhiteSpace(@Model.BillingPhoneNumber))
+                    {
+                        <b>Tel: </b>@Model.BillingPhoneNumber<br />
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(@Model.BillingEmail))
+                    {
+                        <b>E-mail: </b>@Model.BillingEmail<br />
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(@Model.BillingVatNumber))
+                    {
+                        <b>BTW nr: </b>@Model.BillingVatNumber<br />
+                    }
+                }-->
+            </td>
+            <td style="padding: 72px 26mm 0px 0px;" colspan="1" align="left" valign="top" class="details">
+                <table style="width: 100%;">
+                    <tr>
+                        <th>Datum:</th>
+                        <td>@Model.Date</td>
+                    </tr>
+                    <tr>
+                        <th>Bestelnummer:</th>
+                        <td>@Model.OrderNumber</td>
+                    </tr>
+                    <tr>
+                        <th>Factuurnummer:</th>
+                        <td>@Model.InvoiceNumber</td>
+                    </tr>
+                    <tr>
+                        <th>Status:</th>
+                        <td>@Model.Status</td>
+                    </tr>
+                </table>
+            </td>
+            <!--<td colspan="1" align="left" valign="top" class="deliveryAddress">
+                <b>Afleveradres:</b><br />
+                @{
+                    if (!string.IsNullOrWhiteSpace(@Model.ShippingCompany))
+                    {
+                        @Model.ShippingCompany<br />
+                    }
+                }
+                @Model.ShippingName<br />
+                @Model.ShippingAddressLine1<br />
+                @if (!string.IsNullOrWhiteSpace(@Model.ShippingAddressLine2))
+                {
+                    @Model.ShippingAddressLine2<br />
+                }
+                @Model.ShippingZipCode @Model.ShippingCity@if (!string.IsNullOrWhiteSpace(@Model.ShippingState))
+                {
+                    @:, @Model.ShippingState
+                }<br />
+                @Model.ShippingCountry
+            </td>-->
+        </tr>
+    </table>
+
+    <table class="inventory">
+        <thead>
+            <tr>
+                <th>Artikel</th>
+                <th>Prijs per stuk</th>
+                <th>BTW</th>
+                <th>Aantal</th>
+                <th>Prijs incl. BTW</th>
+            </tr>
+        </thead>
+    </table>
+</body>
+</html>

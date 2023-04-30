@@ -1,0 +1,19 @@
+﻿<div class="container-fluid highlight-features">
+    <div class="row">
+        <ng-container *ngIf="website.resources">
+            <ul class="owl-carousel owl-theme highlight-features-carousel" #carouselInitCallback>
+                <li class="item">
+                    {{ website.resources.usp1 }}
+                </li>
+                <li class="item">
+                    {{ website.resources.usp2 }}
+                </li>
+                <li class="item">
+                    {{ website.resources.usp3 }}
+                </li>
+
+                {{ initCarousel() }}
+            </ul>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿<div id="cart" class="shopping-cart-toggle">
+    <span *ngIf="order?.quantity > 0" [@popUp]="order?.quantity">{{ order?.quantity }}</span>
+</div>
+
+<div class="shopping-cart">
+    <ul class="shopping-cart-items">
+        <li *ngFor="let i of order?.products" #productsInitialized [attr.data-id]="i.id">
+            <div>
+                <img *ngIf="i.files.image" src="{{ i.files.pImage[0].compressedPath }}" alt="{{ i.files.pImage[0].alt }}" />
+                <a id="delete" (click)="deleteProduct(i.id)"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 368.8 368.8" style="enable-background:new 0 0 368.8 368.8;" xml:space="preserve"><rect x="148.8" y="-40.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -76.3719 184.3781)" fill="#FFFFFF" width="71.3" height="450.3" /><rect x="148.8" y="-40.7" transform="matrix(0.7071 0.7071 -0.7071 0.7071 184.3781 -76.3719)" fill="#FFFFFF" width="71.3" height="450.3" /></svg></a>
+            </div>
+            <div>
+                <div>
+                    <span class="item-name">{{ i.resources.title }}</span>
+                    <span class="item-price">{{ i.price }}</span>
+                </div>
+                <div class="form-group input-number input-number-small">
+                    <input class="form-control" type="number" value="{{ i.quantity }}" (blur)="updateQuantity(i.id, $event.target.value)" />
+                    <button class="plus" (click)="plus(i.id)" [disabled]="disabled"></button>
+                    <button class="min" (click)="min(i.id)" [disabled]="disabled"></button>
+                </div>
+            </div>
+        </li>
+        <li *ngIf="order?.products?.length === 0">
+            <span class="shopping-cart-empty">{{ website.resources?.scEmpty }}</span>
+        </li>
+    </ul>
+
+    <hr />
+
+    <table>
+        <tbody>
+            <tr>
+                <td>{{ website.resources?.subtotal }}</td>
+                <td>{{ order?.subtotal }}</td>
+            </tr>
+            <tr>
+                <td>{{ website.resources?.shippingCosts }}</td>
+                <td>{{ order?.shippingCosts }}</td>
+            </tr>
+            <tr>
+                <td>{{ website.resources?.total }}</td>
+                <td>{{ order?.total }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr />
+
+    <div class="text-center">
+        <div class="free-card">
+            {{ website.resources?.scWishCard }}
+        </div>
+    </div>
+
+    <div class="row shopping-cart-buttons">
+        <div class="col-7">
+            <a class="btn btn-dark btn-block" [routerLink]="cartUrl">Open winkelmandje</a>
+        </div>
+        <div class="col-5">
+            <a class="btn btn-success btn-block" [routerLink]="checkoutUrl">Afrekenen</a>
+        </div>
+    </div>
+</div>

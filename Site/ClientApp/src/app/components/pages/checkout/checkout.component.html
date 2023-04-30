@@ -1,0 +1,555 @@
+<highlight-features [res]="res" [website]="website"></highlight-features>
+
+<breadcrumbs [breadcrumbs]="res.page.breadcrumbs" [title]="res.page.resources.title"></breadcrumbs>
+
+<section class="container text text-left">
+    <div class="row" *ngIf="order?.products?.length === 0">
+        <div class="col-12 checkout-message">
+            <span>{{ website.resources.scEmpty }}</span>
+        </div>
+    </div>
+    <div class="row" *ngIf="reserveMinutsExpired">
+        <div class="col-12 checkout-message">
+            <span>{{ website.resources.shSession }}</span>
+        </div>
+    </div>
+    <div class="row" *ngIf="errorMessage">
+        <div class="col-12 checkout-message">
+            <span>{{ website.resources.shError }}</span>
+        </div>
+    </div>
+    <div class="row" *ngIf="order?.products?.length !== 0 && !reserveMinutsExpired && !errorMessage">
+        <form class="col-md-7 checkout-form" [formGroup]="checkoutForm" #formDir="ngForm" (ngSubmit)="onSubmit(checkoutForm)">
+            <div ngsReveal>
+                <div class="row checkout-delivery">
+                    <div class="col-md-12">
+                        <div class="pretty p-default p-round p-boxed">
+                            <input type="radio" name="client" value="private" formControlName="client" (change)="clientType($event.target.value)">
+                            <div class="state">
+                                <label>Particulier</label>
+                            </div>
+                        </div>
+                        <div class="pretty p-default p-round p-boxed">
+                            <input type="radio" name="client" value="company" formControlName="client" (change)="clientType($event.target.value)">
+                            <div class="state">
+                                <label>Bedrijf</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="company" style="display: none;">
+                    <div class="form-group col-md-8">
+                        <label class="required" for="company">Bedrijfsnaam</label>
+                        <input type="text" class="form-control form-control-lg" name="company" placeholder="Bedrijfsnaam" formControlName="company" />
+                        <div *ngIf="company.invalid && (company.dirty || company.touched)" class="alert alert-danger">
+                            <div *ngIf="company.errors.required">
+                                Bedrijfsnaam is verplicht.
+                            </div>
+                            <div *ngIf="company.errors.maxlength">
+                                Bedrijfsnaam mag maximaal 250 karakters lang zijn.
+                            </div>
+                            <div *ngIf="company.errors.remote">
+                                {{ company.errors.remote }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4 p-r-md-6">
+                        <label class="required" for="firstName">Voornaam</label>
+                        <input type="text" class="form-control form-control-lg" name="firstName" placeholder="Voornaam" formControlName="firstName" />
+                        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+                            <div *ngIf="firstName.errors.required">
+                                Voornaam is verplicht.
+                            </div>
+                            <div *ngIf="firstName.errors.maxlength">
+                                Voornaam mag maximaal 250 karakters lang zijn.
+                            </div>
+                            <div *ngIf="firstName.errors.pattern">
+                                Voornaam kan alleen bestaan uit letters van het alfabet.
+                            </div>
+                            <div *ngIf="firstName.errors.remote">
+                                {{ firstName.errors.remote }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 p-l-md-6 p-r-md-6">
+                        <label class="required" for="lastName">Achternaam</label>
+                        <input type="text" class="form-control form-control-lg" name="lastName" placeholder="Achternaam" formControlName="lastName" />
+                        <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+                            <div *ngIf="lastName.errors.required">
+                                Achernaam is verplicht.
+                            </div>
+                            <div *ngIf="lastName.errors.maxlength">
+                                Achernaam mag maximaal 250 karakters lang zijn.
+                            </div>
+                            <div *ngIf="lastName.errors.pattern">
+                                Achernaam kan alleen bestaan uit letters van het alfabet.
+                            </div>
+                            <div *ngIf="lastName.errors.remote">
+                                {{ lastName.errors.remote }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 p-l-md-6">
+                        <label class="required" for="email">E-mailadres</label>
+                        <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="E-mailadres" formControlName="email" />
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                            <div *ngIf="email.errors.required">
+                                E-mailadres is verplicht.
+                            </div>
+                            <div *ngIf="email.errors.pattern">
+                                Dit is geen geldig e-mailadres.
+                            </div>
+                            <div *ngIf="email.errors.maxlength">
+                                E-mailadres mag maximaal 250 karakters lang zijn.
+                            </div>
+                            <div *ngIf="email.errors.remote">
+                                {{ email.errors.remote }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4 p-r-md-6">
+                        <label class="required" for="zipCode">Postcode</label>
+                        <input type="text" class="form-control form-control-lg" name="zipCode" placeholder="Postcode" formControlName="zipCode" />
+                        <div *ngIf="zipCode.invalid && (zipCode.dirty || zipCode.touched)" class="alert alert-danger">
+                            <div *ngIf="zipCode.errors.required">
+                                Postcode is verplicht.
+                            </div>
+                            <div *ngIf="zipCode.errors.maxlength">
+                                Postcode mag maximaal 32 karakters lang zijn.
+                            </div>
+                            <div *ngIf="zipCode.errors.pattern">
+                                Dit is geen geldig nederlands postcode.
+                            </div>
+                            <div *ngIf="zipCode.errors.remote">
+                                {{ zipCode.errors.remote }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 p-l-md-6 p-r-md-6">
+                        <label class="required" for="houseNr">Huisnummer</label>
+                        <input type="text" class="form-control form-control-lg" name="houseNr" placeholder="Huisnummer" formControlName="houseNr" />
+                        <div *ngIf="houseNr.invalid && (houseNr.dirty || houseNr.touched)" class="alert alert-danger">
+                            <div *ngIf="houseNr.errors.required">
+                                Huisnummer is verplicht.
+                            </div>
+                            <div *ngIf="houseNr.errors.maxlength">
+                                Huisnummer mag maximaal 15 karakters lang zijn.
+                            </div>
+                            <div *ngIf="houseNr.errors.pattern">
+                                Huisnummer mag alleen bestaan uit cijfers.
+                            </div>
+                            <div *ngIf="houseNr.errors.remote">
+                                {{ houseNr.errors.remote }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 p-l-md-6">
+                        <label for="addition">Toevoeging</label>
+                        <input type="text" class="form-control form-control-lg" name="addition" placeholder="Toevoeging" formControlName="addition" />
+                        <div *ngIf="addition.invalid && (addition.dirty || addition.touched)" class="alert alert-danger">
+                            <div *ngIf="addition.errors.maxlength">
+                                Toevoeging mag maximaal 10 karakters lang zijn.
+                            </div>
+                            <div *ngIf="addition.errors.remote">
+                                {{ addition.errors.remote }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4 p-r-md-6">
+                        <label class="required" for="addressLine1">Straatnaam</label>
+                        <input type="text" class="form-control form-control-lg" name="addressLine1" placeholder="Straatnaam" formControlName="addressLine1" />
+                        <div *ngIf="addressLine1.invalid && (addressLine1.dirty || addressLine1.touched)" class="alert alert-danger">
+                            <div *ngIf="addressLine1.errors.required">
+                                Straatnaam is verplicht.
+                            </div>
+                            <div *ngIf="addressLine1.errors.maxlength">
+                                Straatnaam mag maximaal 220 karakters lang zijn.
+                            </div>
+                            <div *ngIf="addressLine1.errors.remote">
+                                {{ addressLine1.errors.remote }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 p-l-md-6 p-r-md-6">
+                        <label class="required" for="city">Plaats</label>
+                        <input type="text" class="form-control form-control-lg" name="city" placeholder="Plaats" formControlName="city" />
+                        <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+                            <div *ngIf="city.errors.required">
+                                Plaats is verplicht.
+                            </div>
+                            <div *ngIf="city.errors.maxlength">
+                                Plaats mag maximaal 250 karakters lang zijn.
+                            </div>
+                            <div *ngIf="city.errors.remote">
+                                {{ city.errors.remote }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pretty p-svg p-pulse">
+                            <input type="checkbox" name="delivery" formControlName="differentAddress" (click)="deliveryAddress($event)" />
+                            <div class="state p-success">
+                                <svg version="1.1" fill="#FFFFFF" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12.8 12.9" style="enable-background:new 0 0 12.8 12.9;" xml:space="preserve"><g><path d="M11.4,4.8L6.6,9.7l-0.9,0.9c-0.1,0.1-0.3,0.2-0.5,0.2s-0.3-0.1-0.5-0.2L3.8,9.7L1.4,7.3C1.3,7.1,1.2,7,1.2,6.8s0.1-0.3,0.2-0.5l0.9-0.9c0.1-0.1,0.3-0.2,0.5-0.2s0.3,0.1,0.5,0.2l2,2L9.6,3c0.1-0.1,0.3-0.2,0.5-0.2s0.3,0.1,0.5,0.2l0.9,0.9c0.1,0.1,0.2,0.3,0.2,0.5S11.5,4.7,11.4,4.8z" /></g></svg>
+                                <label>Bezorgadres niet gelijk aan factuuradres?</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="checkout-delivery" id="deliveryAddress" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pretty p-default p-round p-boxed">
+                                <input type="radio" name="deliveryClient" value="private" formControlName="deliveryClient" (change)="deliveryClientType($event.target.value)" checked="checked" />
+                                <div class="state">
+                                    <label>Particulier</label>
+                                </div>
+                            </div>
+                            <div class="pretty p-default p-round p-boxed">
+                                <input type="radio" name="deliveryClient" value="company" formControlName="deliveryClient" (change)="deliveryClientType($event.target.value)" />
+                                <div class="state">
+                                    <label>Bedrijf</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="deliveryCompany" style="display: none;">
+                        <div class="form-group col-md-8">
+                            <label class="required" for="deliveryCompany">Bedrijfsnaam</label>
+                            <input type="text" class="form-control form-control-lg" name="deliveryCompany" placeholder="Bedrijfsnaam" formControlName="deliveryCompany" />
+                            <div *ngIf="deliveryCompany.invalid && (deliveryCompany.dirty || deliveryCompany.touched)" class="alert alert-danger">
+                                <div *ngIf="deliveryCompany.errors.required">
+                                    Bedrijfsnaam is verplicht.
+                                </div>
+                                <div *ngIf="deliveryCompany.errors.maxlength">
+                                    Bedrijfsnaam mag maximaal 250 karakters lang zijn.
+                                </div>
+                                <div *ngIf="deliveryCompany.errors.remote">
+                                    {{ deliveryCompany.errors.remote }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 p-r-md-6">
+                            <label class="required" for="deliveryFirstName">Voornaam</label>
+                            <input type="text" class="form-control form-control-lg" name="deliveryFirstName" placeholder="Voornaam" formControlName="deliveryFirstName" />
+                            <div *ngIf="deliveryFirstName.invalid && (deliveryFirstName.dirty || deliveryFirstName.touched)" class="alert alert-danger">
+                                <div *ngIf="deliveryFirstName.errors.required">
+                                    Voornaam is verplicht.
+                                </div>
+                                <div *ngIf="deliveryFirstName.errors.maxlength">
+                                    Voornaam mag maximaal 250 karakters lang zijn.
+                                </div>
+                                <div *ngIf="deliveryFirstName.errors.pattern">
+                                    Voornaam kan alleen bestaan uit letters van het alfabet.
+                                </div>
+                                <div *ngIf="deliveryFirstName.errors.remote">
+                                    {{ deliveryFirstName.errors.remote }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 p-l-md-6">
+                            <label class="required" for="deliveryLastName">Achternaam</label>
+                            <input type="text" class="form-control form-control-lg" name="deliveryLastName" placeholder="Achternaam" formControlName="deliveryLastName" />
+                            <div *ngIf="deliveryLastName.invalid && (deliveryLastName.dirty || deliveryLastName.touched)" class="alert alert-danger">
+                                <div *ngIf="deliveryLastName.errors.required">
+                                    Achernaam is verplicht.
+                                </div>
+                                <div *ngIf="deliveryLastName.errors.maxlength">
+                                    Achernaam mag maximaal 250 karakters lang zijn.
+                                </div>
+                                <div *ngIf="deliveryLastName.errors.pattern">
+                                    Achernaam kan alleen bestaan uit letters van het alfabet.
+                                </div>
+                                <div *ngIf="deliveryLastName.errors.remote">
+                                    {{ deliveryLastName.errors.remote }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4 p-r-md-6">
+                            <label class="required" for="deliveryZipCode">Postcode</label>
+                            <input type="text" class="form-control form-control-lg" name="deliveryZipCode" placeholder="Postcode" formControlName="deliveryZipCode" />
+                            <div *ngIf="deliveryZipCode.invalid && (deliveryZipCode.dirty || deliveryZipCode.touched)" class="alert alert-danger">
+                                <div *ngIf="deliveryZipCode.errors.required">
+                                    Postcode is verplicht.
+                                </div>
+                                <div *ngIf="deliveryZipCode.errors.maxlength">
+                                    Postcode mag maximaal 32 karakters lang zijn.
+                                </div>
+                                <div *ngIf="deliveryZipCode.errors.pattern">
+                                    Dit is geen geldig nederlands postcode.
+                                </div>
+                                <div *ngIf="deliveryZipCode.errors.remote">
+                                    {{ deliveryZipCode.errors.remote }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 p-l-md-6 p-r-md-6">
+                            <label class="required" for="deliveryHouseNr">Huisnummer</label>
+                            <input type="text" class="form-control form-control-lg" name="deliveryHouseNr" placeholder="Huisnummer" formControlName="deliveryHouseNr" />
+                            <div *ngIf="deliveryHouseNr.invalid && (deliveryHouseNr.dirty || deliveryHouseNr.touched)" class="alert alert-danger">
+                                <div *ngIf="deliveryHouseNr.errors.required">
+                                    Huisnummer is verplicht.
+                                </div>
+                                <div *ngIf="deliveryHouseNr.errors.maxlength">
+                                    Huisnummer mag maximaal 15 karakters lang zijn.
+                                </div>
+                                <div *ngIf="deliveryHouseNr.errors.pattern">
+                                    Huisnummer mag alleen bestaan uit cijfers.
+                                </div>
+                                <div *ngIf="deliveryHouseNr.errors.remote">
+                                    {{ deliveryHouseNr.errors.remote }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 p-l-md-6">
+                            <label for="deliveryAddition">Toevoeging</label>
+                            <input type="text" class="form-control form-control-lg" name="deliveryAddition" placeholder="Toevoeging" formControlName="deliveryAddition" />
+                            <div *ngIf="deliveryAddition.invalid && (deliveryAddition.dirty || deliveryAddition.touched)" class="alert alert-danger">
+                                <div *ngIf="deliveryAddition.errors.maxlength">
+                                    Toevoeging mag maximaal 10 karakters lang zijn.
+                                </div>
+                                <div *ngIf="deliveryAddition.errors.remote">
+                                    {{ deliveryAddition.errors.remote }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <label class="required" for="deliveryAddressLine1">Straatnaam</label>
+                        <input type="text" class="form-control form-control-lg" name="deliveryAddressLine1" placeholder="Straatnaam" formControlName="deliveryAddressLine1" />
+                        <div *ngIf="deliveryAddressLine1.invalid && (deliveryAddressLine1.dirty || deliveryAddressLine1.touched)" class="alert alert-danger">
+                          <div *ngIf="deliveryAddressLine1.errors.required">
+                            Straatnaam is verplicht.
+                          </div>
+                          <div *ngIf="deliveryAddressLine1.errors.maxlength">
+                            Straatnaam mag maximaal 220 karakters lang zijn.
+                          </div>
+                          <div *ngIf="deliveryAddressLine1.errors.remote">
+                            {{ deliveryAddressLine1.errors.remote }}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label class="required" for="deliveryCity">Plaats</label>
+                        <input type="text" class="form-control form-control-lg" name="deliveryCity" placeholder="Plaats" formControlName="deliveryCity" />
+                        <div *ngIf="deliveryCity.invalid && (deliveryCity.dirty || deliveryCity.touched)" class="alert alert-danger">
+                          <div *ngIf="deliveryCity.errors.required">
+                            Plaats is verplicht.
+                          </div>
+                          <div *ngIf="deliveryCity.errors.maxlength">
+                            Plaats mag maximaal 250 karakters lang zijn.
+                          </div>
+                          <div *ngIf="deliveryCity.errors.remote">
+                            {{ deliveryCity.errors.remote }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ngsReveal>
+              <div class="checkout-greeting-title">
+                <h2>
+                  <span>{{ res.page.resources.gTitle }}</span>
+                  <svg version="1.1" width="25px" height="27px" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12 12" style="enable-background:new 0 0 12 12;" xml:space="preserve"><g><path fill="#DAA520" d="M12,4.2v2.8h-0.7V12H0.7V7.1H0V4.2H12z M0.7,4.9v1.4h3.8L4.2,4.9H0.7z M10.6,11.3V7.1H8.2l0.6,3.2L6.8,9.4l-1.5,1.4L4.6,7.1H1.4v4.2H10.6z M5.5,4c-0.2,0-0.4-0.1-0.7-0.2S4.3,3.7,4,3.6S3.4,3.3,3.1,3.2S2.5,2.9,2.3,2.7C2.2,2.6,2.1,2.5,2.1,2.4S1.9,2.3,1.9,2.2S1.8,2,1.8,1.9s0-0.2,0-0.3c0-0.1,0-0.2,0-0.3s0.1-0.2,0.1-0.3S2,0.8,2.1,0.7s0.1-0.2,0.2-0.2c0.2-0.2,0.4-0.3,0.6-0.3S3.3,0,3.5,0S4,0,4.2,0.1s0.4,0.2,0.6,0.3c0.1,0.1,0.3,0.2,0.4,0.4s0.2,0.3,0.3,0.5s0.2,0.3,0.3,0.5S5.9,2.1,6,2.3C6,2.1,6.1,2,6.2,1.8s0.2-0.3,0.3-0.5S6.7,1,6.8,0.8s0.3-0.3,0.4-0.4c0.2-0.1,0.3-0.2,0.6-0.3S8.2,0,8.4,0s0.4,0,0.7,0.1s0.4,0.2,0.6,0.3c0.1,0.1,0.2,0.2,0.2,0.2s0.1,0.2,0.2,0.3s0.1,0.2,0.1,0.3s0,0.2,0,0.3c0,0.1,0,0.2,0,0.3s-0.1,0.2-0.1,0.3S10,2.4,9.9,2.4S9.8,2.6,9.7,2.7C9.4,2.9,9.2,3,8.9,3.2S8.3,3.5,8,3.6S7.4,3.8,7.1,3.8S6.6,3.9,6.4,4v0.1L6,4h0L5.5,4.1L5.5,4z M2.8,1c0,0-0.1,0.1-0.1,0.1S2.6,1.2,2.5,1.2s0,0.1-0.1,0.2s0,0.1,0,0.2c0,0,0,0.1,0,0.2s0,0.1,0.1,0.2S2.6,2,2.6,2s0.1,0.1,0.1,0.1C3,2.3,3.2,2.4,3.4,2.6s0.5,0.2,0.8,0.3s0.5,0.2,0.8,0.2s0.5,0.1,0.6,0.1c0-0.2-0.1-0.3-0.2-0.5S5.2,2.3,5.1,2.1S4.9,1.7,4.8,1.5S4.5,1.1,4.3,1c0,0-0.1-0.1-0.2-0.1S4,0.8,4,0.8s-0.1,0-0.2,0s-0.1,0-0.2,0s-0.2,0-0.2,0s-0.1,0-0.2,0S3,0.8,2.9,0.9S2.8,0.9,2.8,1z M4.9,4.9l0.8,4.5l0.9-0.8l1.2,0.5L7.1,4.9H4.9z M7.6,1C7.5,1.1,7.3,1.3,7.2,1.5S6.9,1.9,6.8,2.1S6.6,2.5,6.6,2.7S6.4,3.1,6.4,3.3c0.2,0,0.4-0.1,0.6-0.2S7.5,3,7.8,2.9s0.5-0.2,0.8-0.3S9,2.3,9.2,2.2c0,0,0.1-0.1,0.1-0.1s0.1-0.1,0.1-0.1s0.1-0.1,0.1-0.2s0-0.1,0-0.2c0-0.1,0-0.1,0-0.2s0-0.1-0.1-0.2S9.4,1.1,9.3,1.1S9.3,1,9.2,1C9.1,0.9,9.1,0.9,9,0.8S8.9,0.8,8.8,0.8s-0.1,0-0.2,0s-0.1,0-0.2,0c-0.1,0-0.2,0-0.2,0s-0.1,0-0.2,0S7.9,0.8,7.8,0.8S7.7,0.9,7.6,1z M11.3,6.4V4.9H7.8L8,6.4H11.3z" /></g></svg>
+                </h2>
+                <div class="pretty p-switch p-fill">
+                  <input type="checkbox" (change)="toggleGreetingCard($event.target.checked)" />
+                  <div class="state">
+                    <label></label>
+                  </div>
+                </div>
+              </div>
+                <hr />
+                <div id="wishCard" style="display: none">
+                  <div class="row">
+                    <div class="form-group col-md-12 checkout-textarea">
+                      <label for="greetingCard">Voeg een wenskaartje toe</label>
+                      <textarea rows="6" class="form-control form-control-lg" id="greetingCard" placeholder="Voeg een persoonlijk bericht toe..." (input)="updateCounter($event.target.value)" formControlName="greetingCard"></textarea>
+                      <span class="checkout-textarea-counter" [style.color]="countColor">{{ count }} karakters over</span>
+                      <div *ngIf="greetingCard.invalid && (greetingCard.dirty || greetingCard.touched)" class="alert alert-danger">
+                        <div *ngIf="greetingCard.errors.maxlength">
+                          Bericht voor het wenskaartje mag maximaal 140 karakters lang zijn.
+                        </div>
+                        <div *ngIf="greetingCard.errors.remote">
+                          {{ greetingCard.errors.remote }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row checkout-sample">
+                    <div class="col-md-12 form-group">
+                      <label>Preview van uw wenskaartje</label>
+                      <div class="checkout-greeting-card">
+                        <img *ngIf="res.page.files.wishCard" src="{{ res.page.files.wishCard[0].compressedPath }}" alt="{{ res.page.files.wishCard[0].alt }}" />
+                        <div>
+                          <span [innerHTML]="greetingCardText"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div ngsReveal>
+                <h2>{{ res.page.resources.pmTitle }}</h2>
+                <hr />
+                <div class="row">
+                    <div class="col-md-12 checkout-payment">
+                        <div class="checkout-payment-method">
+                            <div>
+                                <div class="pretty pretty-sm p-default p-round">
+                                    <input type="radio" name="method" checked="checked">
+                                    <div class="state">
+                                        <label></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <svg version="1.1" width="29px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 630.1 547.9" style="enable-background:new 0 0 630.1 547.9;" xml:space="preserve"> <g id="Layer_2"> <rect x="80" y="307.1" width="96.9" height="160.8" /> <ellipse cx="129.4" cy="226.7" rx="54.8" ry="54.8" /> <g> <g> <path d="M360.3,10.4H12.8v527h347.5v-0.1c75.9-1,136-19.9,178.7-56.2c51.9-44.2,78.2-113.9,78.2-207.2 c0-44.6-6.9-84.6-20.6-118.9c-13.1-32.8-32.4-60.7-57.4-82.9c-44-39.1-105.8-60.3-179-61.5C360.3,10.6,360.3,10.4,360.3,10.4z M353.7,45.4c67.3,0,123.5,18.2,162.3,52.8c43.9,39,66.2,98.1,66.2,175.7c0,153.7-74.7,228.5-228.5,228.5 c-11.9,0-275.2,0-305.9,0c0-31.4,0-425.6,0-457C78.6,45.4,341.8,45.4,353.7,45.4z" /> </g> </g> <g> <g> <path fill="#CD0067" d="M344.2,468.1H221.3V88h122.8h-5c102.5,0,211.5,40.4,211.5,190.5c0,158.7-109.1,189.5-211.5,189.5H344.2z" /> </g> </g> </g> <g id="Layer_3"> <g> <g> <path fill="#ffffff" d="M200.2,186.1h33.7c7.6,0,13.4,0.6,17.4,1.7c5.4,1.6,10,4.4,13.8,8.4c3.8,4,6.7,9,8.7,14.8c2,5.8,3,13,3,21.6 c0,7.5-0.9,14-2.8,19.5c-2.3,6.7-5.5,12-9.8,16.2c-3.2,3.1-7.5,5.6-13,7.3c-4.1,1.3-9.5,1.9-16.3,1.9h-34.7V186.1z M218.6,201.6 v60.4h13.8c5.2,0,8.9-0.3,11.2-0.9c3-0.7,5.5-2,7.5-3.8c2-1.8,3.6-4.7,4.8-8.8c1.3-4.1,1.9-9.7,1.9-16.7c0-7.1-0.6-12.5-1.9-16.2 c-1.3-3.8-3-6.7-5.3-8.8s-5.1-3.5-8.6-4.3c-2.6-0.6-7.6-0.9-15.2-0.9H218.6z" /> <path fill="#ffffff" d="M197.7,183.6v96.4h37.2c7,0,12.8-0.7,17.1-2.1c5.8-1.9,10.5-4.5,14-7.9c4.5-4.4,8-10.1,10.4-17.1 c2-5.7,2.9-12.5,2.9-20.3c0-8.8-1.1-16.3-3.1-22.4c-2.1-6.2-5.2-11.4-9.3-15.7c-4.1-4.3-9.1-7.4-14.9-9.1 c-4.3-1.2-10.2-1.8-18.1-1.8H197.7z M233.9,188.6c7.3,0,13,0.6,16.7,1.6c4.9,1.4,9.2,4,12.7,7.7c3.6,3.8,6.3,8.4,8.2,13.9 c1.9,5.6,2.9,12.6,2.9,20.8c0,7.2-0.9,13.5-2.7,18.6c-2.1,6.2-5.2,11.4-9.2,15.2c-2.9,2.8-6.9,5.1-12,6.7 c-3.8,1.2-9,1.8-15.6,1.8c0,0-27.9,0-32.2,0c0-4.6,0-81.8,0-86.4C206.9,188.6,233.9,188.6,233.9,188.6z" /> <path fill="#ffffff" d="M216.1,199.1v65.4h16.3c5.4,0,9.3-0.3,11.8-0.9c3.4-0.8,6.3-2.3,8.5-4.4c2.3-2.1,4.2-5.4,5.6-9.9 c1.3-4.4,2-10.1,2-17.4c0-7.4-0.7-13-2-17c-1.4-4.2-3.4-7.5-5.9-9.9c-2.6-2.4-5.9-4.1-9.7-4.9c-2.8-0.6-7.9-0.9-15.7-0.9H216.1z M226.9,204.1c9.1,0,13,0.4,14.6,0.8c3,0.7,5.5,1.9,7.4,3.7c1.9,1.8,3.5,4.4,4.6,7.8c1.2,3.5,1.7,8.7,1.7,15.5 c0,6.8-0.6,12.1-1.8,16c-1.1,3.6-2.5,6.2-4.1,7.7c-1.7,1.5-3.8,2.6-6.4,3.2c-2.1,0.5-5.6,0.8-10.6,0.8c0,0-8,0-11.3,0 c0-4.4,0-51,0-55.4C223.5,204.1,226.9,204.1,226.9,204.1z" /> </g> <g> <path fill="#ffffff" d="M297.6,277.6v-91.4h67.7v15.5h-49.3v20.3h45.8v15.5h-45.8v24.7h51v15.5H297.6z" /> <path fill="#ffffff" d="M295.1,183.6v96.4h74.4v-20.5c0,0-46.5,0-51,0c0-3.6,0-16.1,0-19.7c4.5,0,45.8,0,45.8,0v-20.5 c0,0-41.3,0-45.8,0c0-3.3,0-11.9,0-15.3c4.5,0,49.3,0,49.3,0v-20.5H295.1z M362.8,188.6c0,2.8,0,7.7,0,10.5c-4.5,0-49.3,0-49.3,0 v25.2c0,0,41.3,0,45.8,0c0,2.8,0,7.7,0,10.5c-4.5,0-45.8,0-45.8,0v29.7c0,0,46.5,0,51,0c0,2.8,0,7.7,0,10.5c-4.5,0-60,0-64.4,0 c0-4.6,0-81.8,0-86.4C304.6,188.6,358.4,188.6,362.8,188.6z" /> </g> <g> <path fill="#ffffff" d="M470.3,277.6h-20.1l-8-20.8h-36.5l-7.6,20.8h-19.6l35.5-91.4h19.7L470.3,277.6z M436.3,241.3l-12.6-33.9 l-12.4,33.9H436.3z" /> <path fill="#ffffff" d="M412.4,183.6l-37.5,96.4h25c0,0,6.6-18,7.6-20.8c3,0,30.1,0,33.1,0c1,2.7,8,20.8,8,20.8H474l-38.6-96.4 H412.4z M432.1,188.6c1.2,2.9,32.1,80.2,34.6,86.4c-4.4,0-12.4,0-14.7,0c-1-2.7-8-20.8-8-20.8h-40c0,0-6.6,18-7.6,20.8 c-2.3,0-9.9,0-14.2,0c2.4-6.2,32.4-83.5,33.6-86.4C418.4,188.6,429.5,188.6,432.1,188.6z" /> <path fill="#ffffff" d="M407.8,243.8h32.1l-16.2-43.6L407.8,243.8z M423.8,214.7c2.7,7.4,7.4,19.8,9,24.1c-4.4,0-13.4,0-17.8,0 C416.5,234.5,421.1,222.1,423.8,214.7z" /> </g> <g> <path fill="#ffffff" d="M485.8,277.6v-90.7h18.4v75.2h45.9v15.5H485.8z" /> <path fill="#ffffff" d="M483.3,184.4v95.7h69.4v-20.5c0,0-41.5,0-45.9,0c0-4.7,0-75.2,0-75.2H483.3z M501.7,189.4 c0,4.7,0,75.2,0,75.2s41.5,0,45.9,0c0,2.8,0,7.7,0,10.5c-4.4,0-54.9,0-59.4,0c0-4.6,0-81.1,0-85.7 C491.4,189.4,498.5,189.4,501.7,189.4z" /> </g> </g> </g> </svg>
+                            </div>
+                            <div>iDeal</div>
+                            <div class="form-group input-select input-select-sm">
+                                <select class="form-control form-control-sm" id="issuer" name="issuer" formControlName="issuer">
+                                    <option value="">Kies uw bank...</option>
+                                    <option *ngFor="let i of res.data.issuers" [value]="i.value">{{ i.key }}</option>
+                                </select>
+                                <div *ngIf="issuer.invalid && (issuer.dirty || issuer.touched)" class="alert alert-danger">
+                                    <div *ngIf="issuer.errors.required">
+                                        Uw bank kiezen is verplicht.
+                                    </div>
+                                    <div *ngIf="issuer.errors.remote">
+                                        {{ issuer.errors.remote }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row checkout-newspaper">
+                    <div class="col-md-12">
+                        <div class="pretty p-svg p-pulse">
+                            <input type="checkbox" name="newspaper" formControlName="newspaper" />
+                            <div class="state p-success">
+                                <svg version="1.1" fill="#FFFFFF" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12.8 12.9" style="enable-background:new 0 0 12.8 12.9;" xml:space="preserve"><g><path d="M11.4,4.8L6.6,9.7l-0.9,0.9c-0.1,0.1-0.3,0.2-0.5,0.2s-0.3-0.1-0.5-0.2L3.8,9.7L1.4,7.3C1.3,7.1,1.2,7,1.2,6.8s0.1-0.3,0.2-0.5l0.9-0.9c0.1-0.1,0.3-0.2,0.5-0.2s0.3,0.1,0.5,0.2l2,2L9.6,3c0.1-0.1,0.3-0.2,0.5-0.2s0.3,0.1,0.5,0.2l0.9,0.9c0.1,0.1,0.2,0.3,0.2,0.5S11.5,4.7,11.4,4.8z" /></g></svg>
+                                <label>Ik wens de nieuwsbrief te ontvangen</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row checkout-agreement">
+                    <div class="col-md-12">
+                        <div class="pretty p-svg p-pulse" style="margin-bottom: 20px;">
+                            <input type="checkbox" name="agreement" formControlName="agreement" />
+                            <div class="state p-success">
+                                <svg version="1.1" fill="#FFFFFF" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12.8 12.9" style="enable-background:new 0 0 12.8 12.9;" xml:space="preserve"><g><path d="M11.4,4.8L6.6,9.7l-0.9,0.9c-0.1,0.1-0.3,0.2-0.5,0.2s-0.3-0.1-0.5-0.2L3.8,9.7L1.4,7.3C1.3,7.1,1.2,7,1.2,6.8s0.1-0.3,0.2-0.5l0.9-0.9c0.1-0.1,0.3-0.2,0.5-0.2s0.3,0.1,0.5,0.2l2,2L9.6,3c0.1-0.1,0.3-0.2,0.5-0.2s0.3,0.1,0.5,0.2l0.9,0.9c0.1,0.1,0.2,0.3,0.2,0.5S11.5,4.7,11.4,4.8z" /></g></svg>
+                                <label></label>
+                            </div>
+                            <span>Ik ga akkoord met de <a [attr.href]="website.files.privacy ? website.files.privacy[0].compressedPath : null" target="_blank">privacy verklaring</a> en de <a [attr.href]="website.files.terms ? website.files.terms[0].compressedPath : null" target="_blank">algemene voorwaarden</a></span>
+                        </div>
+                        <div *ngIf="agreement.invalid && (agreement.dirty || agreement.touched)" class="alert alert-danger">
+                            <div *ngIf="agreement.errors.pattern">
+                                U dient akkoord te gaan met de privacy verklaring en algemene voorwaarden.
+                            </div>
+                            <div *ngIf="agreement.errors.remote">
+                                {{ agreement.errors.remote }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row alert alert-danger" *ngIf="checkoutForm.invalid && submitted" style="margin-top:30px;">
+                    <div class="col-12">
+                        Niet alle velden zijn correct ingevuld.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7">
+                        <a class="btn btn-link" [routerLink]="cartUrl">Terug naar winkelmandje</a>
+                    </div>
+                    <div class="col-5 text-right">
+                        <input type="submit" class="btn btn-success" value="Naar betaling">
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="col-md-5">
+            <div class="checkout-info">
+                <div class="checkout-sidebar">
+                  <div class="checkout-sidebar-inner">
+                    <table class="checkout-products" ngsReveal>
+                      <tbody>
+                        <tr *ngFor="let i of order?.products" #productsInitialized [attr.data-id]="i.id">
+                          <td valign="top">
+                            <img *ngIf="i.files.image" src="{{ i.files.pImage[0].compressedPath }}" alt="{{ i.files.pImage[0].alt }}" />
+                            <a id="delete" (click)="deleteProduct(i.id)"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 368.8 368.8" style="enable-background:new 0 0 368.8 368.8;" xml:space="preserve"><rect x="148.8" y="-40.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -76.3719 184.3781)" fill="#FFFFFF" width="71.3" height="450.3" /><rect x="148.8" y="-40.7" transform="matrix(0.7071 0.7071 -0.7071 0.7071 184.3781 -76.3719)" fill="#FFFFFF" width="71.3" height="450.3" /></svg></a>
+                          </td>
+                          <td valign="middle">
+                            <div class="checkout-product-info">
+                              <span class="checkout-products-title">{{ i.resources.title }}</span>
+                              <span class="checkout-products-subtitle">{{ i.price }}</span>
+                            </div>
+                            <div class="form-group input-number input-number-small">
+                              <input class="form-control" type="number" value="{{ i.quantity }}" (blur)="updateQuantity(i.id, $event.target.value)" />
+                              <button class="plus" (click)="plus(i.id)" [disabled]="disabled"></button>
+                              <button class="min" (click)="min(i.id)" [disabled]="disabled"></button>
+                            </div>
+                          </td>
+                          <!--<td valign="middle">
+            <div class="checkout-products-image">
+                <img src="{{ i.files.pImage[0].compressedPath }}" alt="{{ i.files.pImage[0].alt }}" />
+            </div>
+        </td>
+        <td valign="middle">
+            <div class="checkout-products-text" [title]="i.resources.title">
+                <span class="checkout-products-title">{{ i.quantity }} {{ website.resources.qtyPackage }}</span>
+                <span class="checkout-products-subtitle">{{ i.resources.title }}</span>
+            </div>
+        </td>
+        <td valign="middle" align="right">{{ i.total }}</td>-->
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <hr />
+
+                    <table class="checkout-total" ngsReveal>
+                      <tr>
+                        <td align="left">{{ website.resources.shippingCosts }}</td>
+                        <td align="right">{{ order.shippingCosts }}</td>
+                      </tr>
+                      <tr>
+                        <td align="left">{{ website.resources.tax }}</td>
+                        <td align="right">{{ order.tax }}</td>
+                      </tr>
+
+                    </table>
+
+                    <hr />
+
+                    <table class="checkout-total" ngsReveal>
+                      <tr>
+                        <td align="left">{{ website.resources.total }}</td>
+                        <td align="right">{{ order.total }}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer [website]="website"></footer>

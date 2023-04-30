@@ -1,0 +1,38 @@
+<!--<perfect-scrollbar style="max-width: 100vw; max-height: 100vh;" [config]="config" (psScrollY)="onCustomScroll($event)">-->
+<highlight-features [res]="res" [website]="website"></highlight-features>
+
+<breadcrumbs [breadcrumbs]="res.page.breadcrumbs" [title]="res.page.resources.title"></breadcrumbs>
+
+<section class="container-fluid text about-intro">
+    <div class="row">
+        <div class="col-md-6 offset-md-3" ngsReveal [innerHTML]="res.page.resources.introText">
+        </div>
+    </div>
+</section>
+
+<section class="beginners-image" *ngIf="res.page.files.image">
+    <img class="lazy" [attr.data-src]="res.page.files.image[0].compressedPath" [attr.alt]="res.page.files.image[0].alt" style="width: 100%;" />
+</section>
+
+<section class="beginners lazy" [attr.data-src]="res.page.files.image && res.page.files.image[0].compressedPath" [attr.title]="res.page.files.image ? res.page.files.image[0].alt : null">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-6 beginners-text text text-left scrollReveal" ngsReveal>
+                <div class="beginners-inner" [innerHTML]="res.page.resources.secText">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid text test-nights">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 scrollReveal" ngsReveal [innerHTML]="res.page.resources.lastText">
+        </div>
+    </div>
+</section>
+
+<categories-white [res]="res.data.categories"></categories-white>
+
+<footer [website]="website"></footer>
+<!--</perfect-scrollbar>-->

@@ -1,0 +1,22 @@
+<section class="container categories-white">
+    <div class="row">
+        <ng-container *ngFor="let i of res">
+          <div class="col-lg-4 col-md-6 categories-white-item" *ngIf="i.product !== undefined && i.resources.display === 'true'" ngsReveal>
+            <div>
+              <span class="categories-white-title">{{ i.resources.title }}</span>
+              <span class="categories-white-subtitle">{{ i.resources.types }}</span>
+
+              <div class="categories-white-image lazy" [attr.data-src]="i.files.hlcBg && i.files.hlcBg[0].compressedPath" [attr.alt]="i.files.hlcBg ? i.files.hlcBg[0].alt : null">
+                <img class="lazy" *ngIf="i.files.hlcImage" [attr.data-src]="i.files.hlcImage[0].compressedPath" [attr.alt]="i.files.hlcImage[0].alt" />
+                <span class="categories-white-price" *ngIf="i.product && !i.product?.promo">{{ i.product.price }}</span>
+                <span class="categories-white-price" *ngIf="i.product && i.product?.promo">{{ i.product.promoPrice }}</span>
+              </div>
+            </div>
+            <div>
+              <p [innerHTML]="i.resources.short"></p>
+              <a [routerLink]="[i.url]" class="btn btn-default">Pakket bekijken</a>
+            </div>
+          </div>
+        </ng-container>
+    </div>
+</section>

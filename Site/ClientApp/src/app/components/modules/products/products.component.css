@@ -1,0 +1,255 @@
+.categories > div {
+    padding-left: 5px;
+    padding-right: 5px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.categories-item {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    height: auto;
+    padding: 10px;
+}
+
+  .categories-item > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    width: 100%;
+    height: 100%;
+  }
+
+  .categories-item button {
+    box-sizing: border-box;
+  }
+
+    .categories-item button img {
+      width: 19px;
+      height: 16px;
+      margin: 0 0 2px 6px;
+    }
+
+  .categories-item p {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+    .categories-item .btn {
+        float: left;
+        clear: left;
+
+        padding-left: 14px;
+        padding-right: 14px;
+        margin-top: 23px;
+    }
+
+  .categories-item a.btn {
+    margin-right: 6px;
+  }
+
+      .categories-item button {
+        clear: none !important;
+        margin-right: 0;
+        margin-left: 6px;
+      }
+
+.categories-title {
+    display: block;
+
+    color: #daa520;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    text-transform: uppercase;
+
+    margin-bottom: 5px;
+}
+
+.categories-image {
+  position: relative;
+
+  overflow: hidden;
+  z-index: 0;
+
+  height: 256px !important;
+  min-height: 256px !important;
+}
+
+  .categories-image img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    max-width: 100%;
+
+    transform: translateX(-50%) translateY(-50%);
+  }
+
+.categories-overlay {
+    position: static;
+
+    z-index: 1;
+
+    height: 100%;
+
+    background-color: #1b1b1b;
+    opacity: 1;
+
+    transition: opacity 0.4s;
+}
+
+.categories-inner {
+    position: static;
+
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+
+    height: 100%;
+    padding: 20px 25px;
+}
+
+.categories-prices {
+    display: block;
+
+    overflow: hidden;
+}
+
+.categories-old-price {
+    float: left;
+
+    color: #9b9b9b;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 25px;
+    text-decoration: line-through;
+
+    margin-right: 10px;
+}
+
+.categories-price {
+    float: left;
+
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+}
+
+@media (max-width: 1400px) {
+    .categories > div {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    .categories-item {
+        padding: 9px;
+    }
+
+      .categories-item button img {
+        width: 15px;
+        height: 13px;
+        margin: 0 0 2px 5px;
+      }
+
+        .categories-item p {
+            font-size: 12px;
+            line-height: 22px;
+
+            margin-bottom: 6px;
+        }
+
+        .categories-item .btn {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+            margin-top: 16px;
+        }
+
+        .categories-item a.btn {
+          margin-right: 4px;
+        }
+
+            .categories-item button {
+                margin-right: 0;
+                margin-left: 5px;
+            }
+
+                .categories-item button svg {
+                    width: 10px;
+                    height: 10px;
+                    margin-bottom: -1px;
+                }
+
+    .categories-title {
+        font-size: 13px;
+        line-height: 23px;
+
+        margin-bottom: 4px;
+    }
+    .categories-old-price {
+        font-size: 13px;
+        line-height: 23px;
+        margin-right: 11px;
+    }
+
+    .categories-price {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+  .categories-image {
+    height: 210px !important;
+    min-height: 210px !important;
+  }
+}
+
+@media (max-width: 991.5px) {
+  .categories-inner {
+    padding: 3.5vw 5vw;
+  }
+
+  .categories-image {
+    height: 311px !important;
+    min-height: 311px !important;
+  }
+}
+
+
+@media (max-width: 767.5px) {
+  .categories-image {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+    .categories-image img {
+      position: static;
+      transform: none;
+    }
+
+  .categories-inner {
+    height: auto;
+  }
+
+  .categories-item > div,
+  .categories-item,
+  .categories-inner,
+  .categories > div {
+    display: block;
+  }
+}
