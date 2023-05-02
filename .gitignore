@@ -1,0 +1,15 @@
+.DS_Store
+/appsettings.json
+/appsettings.Development.json
+/bower.json
+/cms.csproj
+/cms.csproj.user
+/secrets.json
+/web.config
+obj/
+bin/
+Keys/
+Migrations/
+Properties/
+Resources/
+.vs/
